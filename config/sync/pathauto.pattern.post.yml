@@ -1,0 +1,22 @@
+uuid: c0a8c9a2-8f65-4c7d-a62e-018d897506b3
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: post
+label: Post
+type: 'canonical_entities:node'
+pattern: 'efemerides/[node:field_date:date:custom:"Y"]/[node:field_date:date:custom:"m"]/[node:field_date:date:custom:"d"]'
+selection_criteria:
+  96129ae4-4a2c-4ccd-bf4a-4cab7b006dd8:
+    id: node_type
+    bundles:
+      post: post
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 96129ae4-4a2c-4ccd-bf4a-4cab7b006dd8
+selection_logic: and
+weight: -5
+relationships: {  }
