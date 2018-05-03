@@ -1,0 +1,89 @@
+body
+  background-color: $bg_blue
+  overflow-x: hidden
+
+#page
+  > header
+    position: fixed
+    background-color: $bg_blue
+    width: 100%
+    height: $header-height
+    overflow: hidden
+
+  > main
+    flex-grow: 1
+    margin-top: $header-height
+
+  > aside
+    background-color: $bg_gray
+    position: fixed
+    top: 0
+    right: 0
+    width: $sidebar-width
+    height: 100vh
+    overflow-y: auto
+
+  > footer
+    background-color: $dark_gray
+    &, a
+      color: $gray
+
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+
+  @media #{$mobile-portrait}
+    // Mobile-portrait
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+
+    > aside
+      // Slide from the top, fill the entire screen
+      background-color: rgba($bg_gray, .97)
+      left: 0
+      width: 100%
+      top: -100vh
+      transition: .5s top
+      &.is-open
+        top: 0
+
+  @media #{$mobile-landscape}
+    // Mobile-landscape
+
+    > main
+      margin: 0 60px
+
+    > header
+      position: fixed
+      top: 0
+      left: 0
+
+    > aside
+      // Slide from the top, fill the entire screen
+      background-color: rgba($bg_gray, .97)
+      left: 0
+      width: 100%
+      top: -100vh
+      transition: .5s top
+      &.is-open
+        top: 0
+
+  @media #{$tablet}
+    > aside
+      // Slide from the right, fixed width, drop shadow
+      background-color: rgba($bg_gray, .97)
+      box-shadow: 0 0 40px rgba(black, .2)
+      top: 0
+      right: -$sidebar-width - 40px // Account for the shadow
+      transition: .5s right
+      width: $sidebar-width + 25px // Extra space for the top-right icon to close
+
+      &.is-open
+        right: 0
+
+  @media #{$desktop}
+    margin-right: $sidebar-width
+
+  @media #{$desktop-wide}
+    margin-right: $sidebar-width

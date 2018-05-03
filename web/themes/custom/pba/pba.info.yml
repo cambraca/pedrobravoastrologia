@@ -1,0 +1,15 @@
+name: PBA
+type: theme
+package: Core
+version: VERSION
+core: 8.x
+base theme: false
+
+regions:
+  header: Header
+  sidebar: Sidebar
+  content: Content
+  footer: Footer
+
+libraries:
+  - pba/global
