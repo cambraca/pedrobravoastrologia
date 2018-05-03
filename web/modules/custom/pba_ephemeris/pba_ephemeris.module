@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * Sets the default post date to the last post's date + 1 day, but only if the last post is in the future.
+ */
+function pba_ephemeris_form_node_post_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $query = \Drupal::entityQuery('node');
+  $query->condition('type', 'post');
+  $query->sort('field_date', 'DESC');
+  $query->range(0, 1);
+  $nids = $query->execute();
+  if ($nids) {
+    $last_post = \Drupal\node\Entity\Node::load(current($nids));
+    $date = new \Drupal\Core\Datetime\DrupalDateTime($last_post->get('field_date')->value);
+    if ($date > new \Drupal\Core\Datetime\DrupalDateTime()) {
+      $form['field_date']['widget'][0]['value']['#default_value'] = $date->add(new DateInterval('P1D'));
+    }
+  }
+}
