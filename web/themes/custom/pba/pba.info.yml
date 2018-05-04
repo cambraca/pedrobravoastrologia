@@ -8,6 +8,7 @@ base theme: false
 regions:
   header: Header
   sidebar: Sidebar
+  extra: Extra
   content: Content
   footer: Footer
 

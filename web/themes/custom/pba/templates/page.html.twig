@@ -51,6 +51,12 @@
     {{ page.header }}
   </header>
 
+  {% if page.extra %}
+    <section id="extra">
+      {{ page.extra }}
+    </section>
+  {% endif %}
+
   <main role="main">
     {{ page.primary_menu }}
     {{ page.secondary_menu }}
@@ -62,7 +68,6 @@
     {{ page.help }}
 
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-    content
     {{ page.content }}
   </main>
 
