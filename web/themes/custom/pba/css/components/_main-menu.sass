@@ -6,8 +6,13 @@
 
   li
     display: inline-block
+    margin-right: $margin
 
   a
+    font-size: 23px
+    font-family: $heading_font
     color: $dim_blue
+    @include hover-color($brand_blue)
     &.is-active
+      font-family: $heading_font_bold
       color: $brand_blue

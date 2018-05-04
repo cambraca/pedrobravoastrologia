@@ -1,0 +1,6 @@
+@mixin hover-color($color)
+  transition: .4s color
+  &:hover, &:active, &:focus
+    outline: none
+    color: $color
+    transition-duration: .1s

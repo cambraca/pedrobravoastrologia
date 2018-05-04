@@ -1,4 +1,5 @@
 body
+  font-family: $body_font
   background-color: $bg_blue
   overflow-x: hidden
 
@@ -9,6 +10,8 @@ body
     width: 100%
     height: $header-height
     overflow: hidden
+    padding: $margin
+    line-height: $header-height - 2 * $margin
 
   > main
     flex-grow: 1
@@ -25,8 +28,6 @@ body
 
   > footer
     background-color: $dark_gray
-    &, a
-      color: $gray
 
   display: flex
   flex-direction: column
