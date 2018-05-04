@@ -151,6 +151,8 @@ article.post.full {
   min-height: 70vh; }
   article.post.full .field_image {
     grid-area: current; }
+    article.post.full .field_image img {
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3); }
   article.post.full .prev {
     grid-area: prev; }
   article.post.full .next {
@@ -178,5 +180,8 @@ article.post.full {
       max-width: 750px; }
       article.post.full .field_image {
         align-self: end; } }
+
+article.post.teaser .field_image img {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
 
 /*# sourceMappingURL=styles.css.map */
