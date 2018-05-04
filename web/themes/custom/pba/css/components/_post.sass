@@ -4,6 +4,8 @@ $medium_post_width: 400px
 article.post.full
   display: grid
   grid-gap: $margin
+  grid-template-areas: "current current" "prev next"
+  grid-template-columns: auto
   padding: $margin
   margin: 0 auto
   position: relative
@@ -23,6 +25,27 @@ article.post.full
   .prev, .next
     max-width: $medium_post_width
 
+  @media #{$mobile-portrait}
+    padding-top: 0
+    min-height: 0
+
+    > .field_image
+      margin:
+        left: -$margin
+        right: -$margin
+
+  @media #{$mobile-landscape}
+    padding:
+      top: 0
+      left: 0
+      right: 0
+
+  .field_image
+    align-self: end
+
+  @media #{$tablet--desktop}
+    max-width: $large_post_width
+
   @media #{$desktop-wide}
     grid-template-areas: "prev current next"
     grid-template-columns: 1fr $large_post_width 1fr
@@ -30,22 +53,6 @@ article.post.full
 
     .prev
       justify-self: end
-
-  @media #{$desktop}
-    grid-template-areas: "current current" "prev next"
-    grid-template-columns: auto
-    max-width: $large_post_width
-
-    .field_image
-      align-self: end
-
-  @media #{$tablet}
-    grid-template-areas: "current current" "prev next"
-    grid-template-columns: auto
-    max-width: $large_post_width
-
-    .field_image
-      align-self: end
 
 article.post.teaser
   .field_image

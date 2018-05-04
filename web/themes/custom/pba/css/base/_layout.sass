@@ -41,12 +41,7 @@ img
   flex-direction: column
   min-height: 100vh
 
-  @media #{$mobile-portrait}
-    // Mobile-portrait
-    display: flex
-    flex-direction: column
-    min-height: 100vh
-
+  @media #{$mobile-portrait--mobile-landscape}
     > aside
       // Slide from the top, fill the entire screen
       background-color: rgba($bg_gray, .97)
@@ -57,26 +52,29 @@ img
       &.is-open
         top: 0
 
-  @media #{$mobile-landscape}
-    // Mobile-landscape
+  @media #{$mobile-portrait}
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+
+    > header
+      position: static
+      height: auto
 
     > main
-      margin: 0 60px
+      margin-top: 0
+
+
+  @media #{$mobile-landscape}
+    > main
+      margin: 0 0 0 60px
 
     > header
       position: fixed
       top: 0
       left: 0
-
-    > aside
-      // Slide from the top, fill the entire screen
-      background-color: rgba($bg_gray, .97)
-      left: 0
-      width: 100%
-      top: -100vh
-      transition: .5s top
-      &.is-open
-        top: 0
+      width: 60px
+      background-color: transparent
 
   @media #{$tablet}
     > aside
