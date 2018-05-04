@@ -6,7 +6,9 @@ body
 #page
   > header
     position: fixed
+    z-index: 100
     background-color: $bg_blue
+    box-sizing: border-box
     width: 100%
     height: $header-height
     overflow: hidden
@@ -18,8 +20,9 @@ body
     margin-top: $header-height
 
   > aside
-    background-color: $bg_gray
     position: fixed
+    z-index: 200
+    background-color: $bg_gray
     top: 0
     right: 0
     width: $sidebar-width
@@ -27,6 +30,7 @@ body
     overflow-y: auto
 
   > footer
+    padding: $margin
     background-color: $dark_gray
 
   display: flex
@@ -76,7 +80,7 @@ body
       background-color: rgba($bg_gray, .97)
       box-shadow: 0 0 40px rgba(black, .2)
       top: 0
-      right: -$sidebar-width - 40px // Account for the shadow
+      right: -$sidebar-width - 25px - 40px // Account for the shadow
       transition: .5s right
       width: $sidebar-width + 25px // Extra space for the top-right icon to close
 
