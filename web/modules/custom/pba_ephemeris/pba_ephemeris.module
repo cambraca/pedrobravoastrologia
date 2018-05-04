@@ -2,7 +2,8 @@
 
 /**
  * Implements hook_form_FORM_ID_alter().
- * Sets the default post date to the last post's date + 1 day, but only if the last post is in the future.
+ * Sets the default post date to the last post's date + 1 day, but only if the
+ * last post is in the future.
  */
 function pba_ephemeris_form_node_post_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   $query = \Drupal::entityQuery('node');
@@ -16,5 +17,55 @@ function pba_ephemeris_form_node_post_form_alter(&$form, \Drupal\Core\Form\FormS
     if ($date > new \Drupal\Core\Datetime\DrupalDateTime()) {
       $form['field_date']['widget'][0]['value']['#default_value'] = $date->add(new DateInterval('P1D'));
     }
+  }
+}
+
+/**
+ * @param \Drupal\node\Entity\Node $node
+ * @param string $direction
+ *
+ * @return \Drupal\node\Entity\Node|null
+ */
+function _pba_ephemeris_adjacent_post(\Drupal\node\Entity\Node $node, $direction = 'prev') {
+  $query = \Drupal::entityQuery('node');
+  $query->condition('type', 'post');
+  $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
+  $query->condition('field_date', $node->get('field_date')->value, $direction === 'next' ? '>' : '<');
+  $query->sort('field_date', $direction === 'next' ? 'ASC' : 'DESC');
+  $query->range(0, 1);
+  $nids = $query->execute();
+  if (!$nids)
+    return NULL;
+  return \Drupal\node\Entity\Node::load(current($nids));
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function pba_ephemeris_entity_view_alter(array &$build, Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+  if ($entity->getEntityTypeId() !== 'node' || $entity->bundle() !== 'post') {
+    return;
+  }
+  switch ($display->getOriginalMode()) {
+    case 'full':
+      $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
+
+      $prev = _pba_ephemeris_adjacent_post($entity, 'prev');
+      if ($prev) {
+        $build['prev'] = $view_builder->view($prev, 'teaser');
+        $build['prev']['#weight'] = 100;
+        $build['prev']['#attributes']['class'][] = 'prev';
+      }
+
+      $next = _pba_ephemeris_adjacent_post($entity, 'next');
+      if ($next) {
+        $build['next'] = $view_builder->view($next, 'teaser');
+        $build['next']['#weight'] = 101;
+        $build['next']['#attributes']['class'][] = 'next';
+      }
+      break;
+    case 'teaser':
+      $build['title']['#access'] = FALSE;
+      break;
   }
 }

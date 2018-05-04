@@ -1,0 +1,46 @@
+$large_post_width: 750px
+$medium_post_width: 400px
+
+article.post.full
+  display: grid
+  grid-gap: $margin
+  padding: $margin
+  margin: 0 auto
+  position: relative
+  min-height: 70vh
+
+  .field_image
+    grid-area: current
+
+  .prev
+    grid-area: prev
+
+  .next
+    grid-area: next
+
+  .prev, .next
+    max-width: $medium_post_width
+
+  @media #{$desktop-wide}
+    grid-template-areas: "prev current next"
+    grid-template-columns: 1fr $large_post_width 1fr
+    align-items: end
+
+    .prev
+      justify-self: end
+
+  @media #{$desktop}
+    grid-template-areas: "current current" "prev next"
+    grid-template-columns: auto
+    max-width: $large_post_width
+
+    .field_image
+      align-self: end
+
+  @media #{$tablet}
+    grid-template-areas: "current current" "prev next"
+    grid-template-columns: auto
+    max-width: $large_post_width
+
+    .field_image
+      align-self: end
