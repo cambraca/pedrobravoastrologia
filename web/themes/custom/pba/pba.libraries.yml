@@ -4,5 +4,4 @@ global:
     theme:
       css/styles.css: {}
       https://use.fontawesome.com/releases/v5.0.11/css/all.css: {external: true}
-      fonts/bellota_regular_macroman/stylesheet.css: {}
-      fonts/bellota_bold_macroman/stylesheet.css: {}
+      https://fonts.googleapis.com/css?family=Oxygen: {external: true}

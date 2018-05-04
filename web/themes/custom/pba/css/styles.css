@@ -8,8 +8,18 @@ body {
 a {
   text-decoration: none; }
 
+@font-face {
+  font-family: "bellotaregular";
+  src: url("../fonts/Bellota-Regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: "bellotabold";
+  src: url("../fonts/Bellota-Bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
 body {
-  font-family: Arial, sans-serif;
+  font-family: Oxygen, Arial, sans-serif;
   background-color: #d2d6dc;
   overflow-x: hidden; }
 
