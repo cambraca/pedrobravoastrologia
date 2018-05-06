@@ -1,4 +1,4 @@
-uuid: 651406bc-6d74-4ec6-bc19-1642b6dd5e15
+uuid: f880ba0f-a578-4247-941b-982758052bc2
 langcode: en
 status: true
 dependencies:
@@ -7,13 +7,13 @@ dependencies:
   module:
     - system
   theme:
-    - stark
+    - pba
 _core:
   default_config_hash: xCOijLdB1-UgXxQ9a0D1_pd8vxNEhfMnxXZc8jYhHjs
-id: stark_tools
-theme: stark
-region: sidebar_first
-weight: 0
+id: pba_tools
+theme: pba
+region: extra
+weight: -2
 provider: null
 plugin: 'system_menu_block:tools'
 settings:

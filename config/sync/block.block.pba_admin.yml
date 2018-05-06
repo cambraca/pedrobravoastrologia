@@ -1,4 +1,4 @@
-uuid: 2f68e2de-b8d7-4157-82a2-e53af4ef6654
+uuid: b2d2a918-199a-445b-9a85-f5e58bdc39cf
 langcode: en
 status: false
 dependencies:
@@ -7,13 +7,13 @@ dependencies:
   module:
     - system
   theme:
-    - stark
+    - pba
 _core:
   default_config_hash: DWAB7HaAfAJerAmyT8B2K-6qxicu9n0PcKVpDr--N4c
-id: stark_admin
-theme: stark
-region: sidebar_first
-weight: 1
+id: pba_admin
+theme: pba
+region: header
+weight: -2
 provider: null
 plugin: 'system_menu_block:admin'
 settings:

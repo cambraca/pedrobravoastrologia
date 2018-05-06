@@ -1,17 +1,17 @@
-uuid: 43bb5476-26b5-4a40-a349-27430b8e8d85
+uuid: f6c04e78-4c7e-4b4f-bd5e-26506d15fcc1
 langcode: en
 status: false
 dependencies:
   module:
     - system
   theme:
-    - stark
+    - pba
 _core:
   default_config_hash: fRKXNB91UxDvEMkzCR8ZBsawfC6Fqbme2gtobei3gu4
-id: stark_branding
-theme: stark
+id: pba_branding
+theme: pba
 region: header
-weight: 0
+weight: -3
 provider: null
 plugin: system_branding_block
 settings:

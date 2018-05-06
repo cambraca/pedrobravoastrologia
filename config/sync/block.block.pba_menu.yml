@@ -1,4 +1,4 @@
-uuid: ca069ddc-d307-4572-ba70-45f5b2ce0b3e
+uuid: 3914b538-1b62-4220-89bf-c516cd967a97
 langcode: en
 status: true
 dependencies:
@@ -7,11 +7,11 @@ dependencies:
   module:
     - system
   theme:
-    - stark
-id: menu
-theme: stark
+    - pba
+id: pba_menu
+theme: pba
 region: header
-weight: 0
+weight: -4
 provider: null
 plugin: 'system_menu_block:main'
 settings:

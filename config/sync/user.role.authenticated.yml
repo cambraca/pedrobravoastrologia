@@ -11,6 +11,7 @@ is_admin: false
 permissions:
   - 'access content'
   - 'access content overview'
+  - 'access user profiles'
   - 'create post content'
   - 'delete any post content'
   - 'delete own post content'

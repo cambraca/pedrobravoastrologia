@@ -1,15 +1,15 @@
-uuid: c93b32ca-836b-4887-8ac5-21ae5c997c8d
+uuid: f5cdc4f6-7570-447c-a576-1626c70ab2ff
 langcode: en
 status: false
 dependencies:
   theme:
-    - stark
+    - pba
 _core:
   default_config_hash: 8yptDf6WrXxeyevUz4nP5vfr7BtxQqCBMninhV2IJ1g
-id: stark_page_title
-theme: stark
+id: pba_page_title
+theme: pba
 region: content
-weight: -30
+weight: -3
 provider: null
 plugin: page_title_block
 settings:

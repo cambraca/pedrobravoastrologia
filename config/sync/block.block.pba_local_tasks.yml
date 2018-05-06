@@ -1,15 +1,15 @@
-uuid: 868d3a68-c952-42ae-a77e-2942c757f494
+uuid: 22718791-8b18-4554-b88c-7a966b39cd7b
 langcode: en
 status: true
 dependencies:
   theme:
-    - stark
+    - pba
 _core:
   default_config_hash: c-06bbElRY5sKmglk74ppgTW93Et4-EJFyNiUZMb8JY
-id: stark_local_tasks
-theme: stark
-region: content
-weight: -20
+id: pba_local_tasks
+theme: pba
+region: extra
+weight: -1
 provider: null
 plugin: local_tasks_block
 settings:

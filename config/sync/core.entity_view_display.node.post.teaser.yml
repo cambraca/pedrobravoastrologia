@@ -5,24 +5,28 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.post.body
+    - field.field.node.post.field_date
+    - field.field.node.post.field_image
+    - image.style.medium
     - node.type.post
   module:
-    - text
+    - image
     - user
 id: node.post.teaser
 targetEntityType: node
 bundle: post
 mode: teaser
 content:
-  body:
+  field_image:
+    type: image
+    weight: 0
+    region: content
     label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
     settings:
-      trim_length: 600
+      image_style: medium
+      image_link: content
     third_party_settings: {  }
-    region: content
-  links:
-    weight: 100
-    region: content
-hidden: {  }
+hidden:
+  body: true
+  field_date: true
+  links: true
