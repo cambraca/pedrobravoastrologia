@@ -52,16 +52,22 @@ function pba_ephemeris_entity_view_alter(array &$build, Drupal\Core\Entity\Entit
 
       $prev = _pba_ephemeris_adjacent_post($entity, 'prev');
       if ($prev) {
-        $build['prev'] = $view_builder->view($prev, 'teaser');
-        $build['prev']['#weight'] = 100;
-        $build['prev']['#attributes']['class'][] = 'prev';
+        $build['prev'] = [
+          '#type' => 'container',
+          '#weight' => 100,
+          '#attributes' => ['class' => ['prev']],
+          'node' => $view_builder->view($prev, 'teaser'),
+        ];
       }
 
       $next = _pba_ephemeris_adjacent_post($entity, 'next');
       if ($next) {
-        $build['next'] = $view_builder->view($next, 'teaser');
-        $build['next']['#weight'] = 101;
-        $build['next']['#attributes']['class'][] = 'next';
+        $build['next'] = [
+          '#type' => 'container',
+          '#weight' => 101,
+          '#attributes' => ['class' => ['next']],
+          'node' => $view_builder->view($next, 'teaser'),
+        ];
       }
       break;
     case 'teaser':
