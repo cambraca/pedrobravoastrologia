@@ -1,0 +1,56 @@
+#sidebar-calendar
+  width: 215px
+  margin: 50px auto $margin
+  padding-right: 20px
+  text-align: center
+  color: $dim_blue
+
+  h2
+    font-family: $heading_font
+    font-size: 40px
+    font-weight: normal
+    margin: 5px 0 22px 20px
+
+  table
+    width: 100%
+    border-spacing: 9px
+    border-collapse: separate
+
+    caption
+      float: left
+      width: 20px
+      font-size: 20px
+      font-weight: normal
+      margin-top: -3px
+
+    tbody
+      float: right
+      margin: -9px
+
+    td
+      border-radius: 50%
+      background-color: $bg_blue
+      width: 16px
+      height: 16px
+
+      &.skip
+        background-color: transparent
+
+      a
+        background: $brand_blue
+        width: 16px
+        height: 16px
+        font-size: 0
+        display: block
+        border-radius: 50%
+
+        &.active:before
+          content: ""
+          display: block
+          position: absolute
+          width: 20px
+          height: 20px
+          margin-left: -4px
+          margin-top: -4px
+          border-radius: 50%
+          border: 2px solid $accent_red

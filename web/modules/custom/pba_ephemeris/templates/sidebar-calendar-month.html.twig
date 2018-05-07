@@ -1,0 +1,28 @@
+{% set month_labels = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'] %}
+{% set skip = date|date('N')-1 %}
+{% set end_day = date|date_modify("+1 month")|date_modify("-1 day")|date("j") %}
+<table>
+  <caption>
+    {{ month_labels[date|date('n')-1] }}
+  </caption>
+  <tbody>
+  <tr>
+    {% if skip > 0 %}
+      {% for skipped_day in range(1, skip) %}
+        <td class="skip"></td>
+      {% endfor %}
+    {% endif %}
+    {% for day in range(1, end_day) %}
+    <td>
+      {% if posts_by_date[day] %}
+        {{ link(posts_by_date[day].date|date('j M Y'), posts_by_date[day].url, {'title': posts_by_date[day].date|date('j M Y'), 'class': posts_by_date[day].class}) }}
+      {% endif %}
+    </td>
+    {% if (skip + day) % 7 == 0 %}
+  </tr>
+  <tr>
+    {% endif %}
+    {% endfor %}
+  </tr>
+  </tbody>
+</table>

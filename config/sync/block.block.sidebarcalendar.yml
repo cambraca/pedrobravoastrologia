@@ -1,0 +1,28 @@
+uuid: 2709a75d-9092-4128-948e-c89b452db55e
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - pba_ephemeris
+  theme:
+    - pba
+id: sidebarcalendar
+theme: pba
+region: sidebar
+weight: 0
+provider: null
+plugin: calendar
+settings:
+  id: calendar
+  label: 'Sidebar calendar'
+  provider: pba_ephemeris
+  label_display: '0'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      post: post
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

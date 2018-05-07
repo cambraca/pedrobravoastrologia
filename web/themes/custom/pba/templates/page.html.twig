@@ -71,18 +71,16 @@
     {{ page.content }}
   </main>
 
-  {#{% if page.sidebar %}#}
-    <aside>
-      <p>sidebar1<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar
-      <p>sidebar2<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar
-      <p>sidebar3<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar
-      <p>sidebar4<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar
-      <p>sidebar5<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar
-      <p>sidebar6<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar
-      <p>sidebar7<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar<p>sidebar
+  {% if page.sidebar %}
+    <input type="checkbox" id="sidebar-toggle">
+    <aside id="sidebar">
       {{ page.sidebar }}
     </aside>
-  {#{% endif %}#}
+    <script>
+      var sidebar = document.getElementById('sidebar');
+      sidebar.scrollTop = sidebar.scrollHeight
+    </script>
+  {% endif %}
 
   <footer role="contentinfo">
     <div class="copyright">
