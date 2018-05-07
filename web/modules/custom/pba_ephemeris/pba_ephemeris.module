@@ -75,3 +75,19 @@ function pba_ephemeris_entity_view_alter(array &$build, Drupal\Core\Entity\Entit
       break;
   }
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function pba_ephemeris_node_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->bundle() !== 'post')
+    return;
+
+  foreach (['prev', 'next'] as $direction) {
+    $adjacent = _pba_ephemeris_adjacent_post($entity, $direction);
+    if (!$adjacent)
+      continue;
+
+    \Drupal\Core\Cache\Cache::invalidateTags($adjacent->getCacheTagsToInvalidate());
+  }
+}
