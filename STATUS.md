@@ -9,11 +9,11 @@ Done
 
 - Invalidate post node cache when adjacent post is saved
 
+- Homepage route (redirects to latest post)
+
 
 To do
 -----
-
-- Homepage route (redirects to latest post)
 
 - Sidebar calendar
 
