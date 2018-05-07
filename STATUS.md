@@ -7,9 +7,13 @@ Done
 
 - Styling (except "Author" page)
 
+- Invalidate post node cache when adjacent post is saved
+
 
 To do
 -----
+
+- Homepage route (redirects to latest post)
 
 - Sidebar calendar
 
@@ -17,10 +21,6 @@ To do
     query to know which month to start rendering)
   - Invalidate appropriate month cache(s) when post node is saved
 
-- Invalidate full node render when adjacent post is published
-
-  - Check if necessary first!
-  
 - Meta tags
 
   - Facebook/Twitter-specific tags
@@ -53,3 +53,5 @@ To do
 
   - Links to posts work using AJAX, calendar is updated by JS
   - Pre-load adjacent posts (?)
+
+- 404 / 403 pages

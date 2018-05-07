@@ -1,0 +1,7 @@
+pba_ephemeris.latest:
+  path: '/efemerides'
+  defaults:
+    _controller: '\Drupal\pba_ephemeris\Controller\PostController::latest'
+    _title: 'Efemérides'
+  requirements:
+    _access: 'TRUE'
