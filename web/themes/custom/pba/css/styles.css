@@ -194,7 +194,7 @@ article.post.full {
   padding: 30px;
   margin: 0 auto;
   position: relative;
-  min-height: 70vh; }
+  min-height: 65vh; }
   article.post.full .field_image {
     grid-area: current; }
     article.post.full .field_image img {
