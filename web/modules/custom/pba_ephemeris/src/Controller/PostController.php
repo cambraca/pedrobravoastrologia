@@ -33,6 +33,9 @@ class PostController extends ControllerBase {
       return NULL;
     }
 
+    // See https://drupal.stackexchange.com/a/222042/3904
+    \Drupal::service('page_cache_kill_switch')->trigger();
+
     return $this->redirect('entity.node.canonical', ['node' => current($nids)]);
   }
 }
