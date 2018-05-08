@@ -149,3 +149,26 @@ function pba_ephemeris_preprocess_sidebar_calendar_month(&$variables) {
 
   $variables['posts_by_date'] = $posts_by_date;
 }
+
+/**
+ * Implements hook_preprocess_HOOK().
+ *
+ * This should ideally be done using CustomMenuActiveTrail. See PbaEphemerisServiceProvider.php.
+ */
+function pba_ephemeris_preprocess_menu(&$variables) {
+  if ($variables['menu_name'] !== 'main')
+    return;
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if (!$node || $node->bundle() !== 'post')
+    return;
+
+  foreach ($variables['items'] as &$item) {
+    /** @var \Drupal\Core\Url $url */
+    $url = $item['url'];
+    if ($url->getRouteName() === 'pba_ephemeris.latest') {
+      $item['extra'] = ['class' => 'is-active'];
+      return;
+    }
+  }
+}
