@@ -6,9 +6,9 @@
 
   li
     display: inline-block
-    margin-right: $margin
 
   a
+    margin-right: $margin
     font-size: 23px
     font-family: $heading_font
     color: $dim_blue
@@ -16,3 +16,20 @@
     &.is-active
       font-family: $heading_font_bold
       color: $brand_blue
+
+    @media #{$mobile-portrait--mobile-landscape}
+      display: none
+
+    @media #{$mobile-portrait}
+      &.is-active
+        display: inline
+
+  @media #{$mobile-portrait--mobile-landscape}
+    #header-toggle:checked ~ header &
+      li
+        display: block
+        text-align: center
+
+      a
+        display: block
+        margin: 0 0 $margin

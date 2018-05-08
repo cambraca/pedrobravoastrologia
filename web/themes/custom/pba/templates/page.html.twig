@@ -47,6 +47,8 @@
 #}
 <section id="page"{% if page.sidebar %} class="has-sidebar"{% endif %}>
 
+  <input type="checkbox" id="header-toggle">
+  <label for="header-toggle" id="header-toggle-label" class="fas fa-bars"></label>
   <header role="banner">
     {{ page.header }}
   </header>

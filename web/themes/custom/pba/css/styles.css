@@ -31,6 +31,30 @@ img {
   display: flex;
   flex-direction: column;
   min-height: 100vh; }
+  #page #header-toggle-label {
+    position: fixed;
+    top: 35px;
+    left: 30px;
+    z-index: 99999999;
+    font-size: 24px;
+    color: #8b9db6;
+    transition: 0.4s color;
+    display: none; }
+    #page #header-toggle-label:hover, #page #header-toggle-label:active, #page #header-toggle-label:focus {
+      outline: none;
+      color: #226591;
+      transition-duration: 0.1s; }
+    @media screen and (max-width: 749px) {
+      #page #header-toggle-label {
+        display: block; } }
+    @media screen and (min-width: 600px) and (max-width: 749px) {
+      #page #header-toggle-label {
+        left: 20px;
+        top: 35px; } }
+  #page #header-toggle:checked + #header-toggle-label {
+    color: #226591; }
+  #page #header-toggle {
+    display: none; }
   #page > header {
     position: fixed;
     z-index: 100;
@@ -41,26 +65,44 @@ img {
     overflow: hidden;
     padding: 30px;
     line-height: 30px; }
+    @media screen and (max-width: 599px) {
+      #page > header {
+        padding-left: 60px; } }
+  @media screen and (max-width: 749px) {
+    #page #header-toggle:checked ~ header {
+      background-color: rgba(235, 235, 235, 0.98);
+      position: fixed;
+      padding: 60px;
+      width: 100%;
+      height: 100%; }
+    #page #header-toggle:checked ~ footer {
+      position: fixed;
+      bottom: 0;
+      z-index: 110;
+      background-color: transparent; } }
   #page > main {
     flex-grow: 1;
     margin-top: 90px; }
   #page #sidebar-toggle-label {
-    display: block;
     position: fixed;
     top: 30px;
     right: 30px;
     z-index: 99999999;
     font-size: 24px;
     color: #8b9db6;
-    transition: 0.4s color; }
+    transition: 0.4s color;
+    display: none; }
     #page #sidebar-toggle-label:hover, #page #sidebar-toggle-label:active, #page #sidebar-toggle-label:focus {
       outline: none;
       color: #226591;
       transition-duration: 0.1s; }
+    @media screen and (max-width: 1199px) {
+      #page #sidebar-toggle-label {
+        display: block; } }
     @media screen and (min-width: 600px) and (max-width: 749px) {
       #page #sidebar-toggle-label {
         left: 20px;
-        top: 70px; } }
+        top: 85px; } }
   #page #sidebar-toggle:checked + #sidebar-toggle-label {
     color: #226591; }
   #page #sidebar-toggle {
@@ -83,6 +125,8 @@ img {
       height: 80px;
       background: linear-gradient(to bottom, #ebebeb 30%, rgba(235, 235, 235, 0) 100%); }
   #page > footer {
+    box-sizing: border-box;
+    width: 100%;
     padding: 30px;
     background-color: #252525; }
   @media screen and (max-width: 749px) {
@@ -148,9 +192,9 @@ img {
   margin: 0;
   padding: 0; }
 #block-pba-menu li {
-  display: inline-block;
-  margin-right: 30px; }
+  display: inline-block; }
 #block-pba-menu a {
+  margin-right: 30px;
   font-size: 23px;
   font-family: bellotaregular, serif;
   color: #8b9db6;
@@ -162,6 +206,19 @@ img {
   #block-pba-menu a.is-active {
     font-family: bellotabold, serif;
     color: #226591; }
+  @media screen and (max-width: 749px) {
+    #block-pba-menu a {
+      display: none; } }
+  @media screen and (max-width: 599px) {
+    #block-pba-menu a.is-active {
+      display: inline; } }
+@media screen and (max-width: 749px) {
+  #header-toggle:checked ~ header #block-pba-menu li {
+    display: block;
+    text-align: center; }
+  #header-toggle:checked ~ header #block-pba-menu a {
+    display: block;
+    margin: 0 0 30px; } }
 
 .notes-wrapper {
   display: flex;
