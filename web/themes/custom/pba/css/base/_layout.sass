@@ -25,10 +25,16 @@ img
 
   #sidebar-toggle
     display: none
-    position: absolute
-    top: 50px
-    right: 50px
+    position: fixed
+    top: 30px
+    right: $margin
     z-index: 99999999
+    color: $dim_blue
+    @include icon-checkbox($brand_blue)
+
+    @media #{$mobile-landscape}
+      left: 15px
+      top: 70px
 
   > aside
     position: fixed
@@ -108,8 +114,6 @@ img
       &:checked + aside
         right: 0
 
-  @media #{$desktop}
-    margin-right: $sidebar-width
-
-  @media #{$desktop-wide}
+@media #{$desktop--desktop-wide}
+  #page.has-sidebar
     margin-right: $sidebar-width

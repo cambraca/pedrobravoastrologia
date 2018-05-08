@@ -45,7 +45,7 @@
  * @ingroup themeable
  */
 #}
-<section id="page">
+<section id="page"{% if page.sidebar %} class="has-sidebar"{% endif %}>
 
   <header role="banner">
     {{ page.header }}
@@ -72,7 +72,7 @@
   </main>
 
   {% if page.sidebar %}
-    <input type="checkbox" id="sidebar-toggle">
+    <input type="checkbox" id="sidebar-toggle" class="far fa-calendar-alt">
     <aside id="sidebar">
       {{ page.sidebar }}
     </aside>

@@ -4,3 +4,12 @@
     outline: none
     color: $color
     transition-duration: .1s
+
+@mixin icon-checkbox($hover_color)
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  font-size: 24px
+  @include hover-color($hover_color)
+  &:checked
+    color: $hover_color
