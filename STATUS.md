@@ -11,15 +11,11 @@ Done
 
 - Homepage route (redirects to latest post)
 
+- Sidebar calendar
+
 
 To do
 -----
-
-- Sidebar calendar
-
-  - Theme function for a month, main block has caching off (simple
-    query to know which month to start rendering)
-  - Invalidate appropriate month cache(s) when post node is saved
 
 - Meta tags
 
@@ -55,3 +51,5 @@ To do
   - Pre-load adjacent posts (?)
 
 - 404 / 403 pages
+
+- Sidebar calendar: cache output by month (invalidate on post node)
