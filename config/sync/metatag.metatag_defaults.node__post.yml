@@ -1,0 +1,8 @@
+uuid: 21657c85-1a82-4184-8763-86d1e8b2d88c
+langcode: en
+status: true
+dependencies: {  }
+id: node__post
+label: 'Content: Post'
+tags:
+  image_src: '[node:field_image]'
