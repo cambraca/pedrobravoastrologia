@@ -44,28 +44,27 @@ img {
   #page > main {
     flex-grow: 1;
     margin-top: 90px; }
-  #page #sidebar-toggle {
-    display: none;
+  #page #sidebar-toggle-label {
+    display: block;
     position: fixed;
     top: 30px;
     right: 30px;
     z-index: 99999999;
-    color: #8b9db6;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
     font-size: 24px;
+    color: #8b9db6;
     transition: 0.4s color; }
-    #page #sidebar-toggle:hover, #page #sidebar-toggle:active, #page #sidebar-toggle:focus {
+    #page #sidebar-toggle-label:hover, #page #sidebar-toggle-label:active, #page #sidebar-toggle-label:focus {
       outline: none;
       color: #226591;
       transition-duration: 0.1s; }
-    #page #sidebar-toggle:checked {
-      color: #226591; }
     @media screen and (min-width: 600px) and (max-width: 749px) {
-      #page #sidebar-toggle {
-        left: 15px;
+      #page #sidebar-toggle-label {
+        left: 20px;
         top: 70px; } }
+  #page #sidebar-toggle:checked + #sidebar-toggle-label {
+    color: #226591; }
+  #page #sidebar-toggle {
+    display: none; }
   #page > aside {
     position: fixed;
     z-index: 200;
@@ -93,10 +92,8 @@ img {
       width: 100%;
       top: -100vh;
       transition: 0.5s top; }
-    #page #sidebar-toggle {
-      display: block; }
-      #page #sidebar-toggle:checked + aside {
-        top: 0; } }
+    #page #sidebar-toggle:checked ~ aside {
+      top: 0; } }
   @media screen and (max-width: 599px) {
     #page {
       display: flex;
@@ -124,10 +121,8 @@ img {
       right: -340px;
       transition: 0.5s right;
       width: 300px; }
-    #page #sidebar-toggle {
-      display: block; }
-      #page #sidebar-toggle:checked + aside {
-        right: 0; } }
+    #page #sidebar-toggle:checked ~ aside {
+      right: 0; } }
 
 @media screen and (min-width: 1200px) {
   #page.has-sidebar {

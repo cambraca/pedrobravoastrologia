@@ -72,7 +72,8 @@
   </main>
 
   {% if page.sidebar %}
-    <input type="checkbox" id="sidebar-toggle" class="far fa-calendar-alt">
+    <input type="checkbox" id="sidebar-toggle">
+    <label for="sidebar-toggle" id="sidebar-toggle-label" class="far fa-calendar-alt"></label>
     <aside id="sidebar">
       {{ page.sidebar }}
     </aside>

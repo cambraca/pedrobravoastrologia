@@ -23,18 +23,25 @@ img
     flex-grow: 1
     margin-top: $header-height
 
-  #sidebar-toggle
-    display: none
+  #sidebar-toggle-label
+    display: block
     position: fixed
     top: 30px
     right: $margin
     z-index: 99999999
+    font-size: 24px
     color: $dim_blue
-    @include icon-checkbox($brand_blue)
+    @include hover-color($brand_blue)
 
     @media #{$mobile-landscape}
-      left: 15px
+      left: 20px
       top: 70px
+
+  #sidebar-toggle:checked + #sidebar-toggle-label
+    color: $brand_blue
+
+  #sidebar-toggle
+    display: none
 
   > aside
     position: fixed
@@ -71,10 +78,8 @@ img
       width: 100%
       top: -100vh
       transition: .5s top
-    #sidebar-toggle
-      display: block
-      &:checked + aside
-        top: 0
+    #sidebar-toggle:checked ~ aside
+      top: 0
 
   @media #{$mobile-portrait}
     display: flex
@@ -110,10 +115,8 @@ img
       transition: .5s right
       width: $sidebar-width + 25px // Extra space for the top-right icon to close
 
-    #sidebar-toggle
-      display: block
-      &:checked + aside
-        right: 0
+    #sidebar-toggle:checked ~ aside
+      right: 0
 
 @media #{$desktop--desktop-wide}
   #page.has-sidebar
