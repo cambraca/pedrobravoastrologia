@@ -74,7 +74,8 @@ img {
     right: 0;
     width: 275px;
     height: 100vh;
-    overflow-y: auto; }
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; }
     #page > aside:before {
       content: "";
       display: block;
