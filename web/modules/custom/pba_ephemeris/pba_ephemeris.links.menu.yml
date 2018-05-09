@@ -1,0 +1,4 @@
+pba_ephemeris.admin_settings:
+  title: 'Ephemeris settings'
+  route_name: pba_ephemeris.admin_settings
+  parent: system.admin_config_content
