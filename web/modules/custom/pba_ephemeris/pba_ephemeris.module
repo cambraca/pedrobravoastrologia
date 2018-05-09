@@ -180,6 +180,9 @@ function pba_ephemeris_cron() {
   $request_time = \Drupal::time()->getRequestTime();
   $config = \Drupal::configFactory()->getEditable('pba_ephemeris.settings');
 
+  if (!$config->get('auto_publish'))
+    return;
+
   $now = new \Drupal\Core\Datetime\DrupalDateTime();
   $publish_time = new \Drupal\Core\Datetime\DrupalDateTime($config->get('publish_time'));
   $publish_time->setDate($now->format('Y'), $now->format('m'), $now->format('d'));
@@ -192,14 +195,14 @@ function pba_ephemeris_cron() {
     return;
 
   $last_ran = \Drupal::state()->get('pba_ephemeris.last_ran');
-//  if ($last_ran > ($request_time - 60 * 60 * 2))
-//    // Exit if it has run in the last 2 hours
-//    return;
+  if ($last_ran > ($request_time - 60 * 60 * 2))
+    // Exit if it has run in the last 2 hours
+    return;
   \Drupal::state()->set('pba_ephemeris.last_ran', $request_time);
 
   $query = \Drupal::entityQuery('node');
   $query->condition('type', 'post');
-//  $query->condition('status', \Drupal\node\NodeInterface::NOT_PUBLISHED);
+  $query->condition('status', \Drupal\node\NodeInterface::NOT_PUBLISHED);
   $query->condition('field_date', $now->format('Y-m-d'));
   $query->exists('field_image');
   $nids = $query->execute();
