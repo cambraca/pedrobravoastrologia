@@ -5,3 +5,11 @@ pba_ephemeris.latest:
     _title: 'Efemérides'
   requirements:
     _access: 'TRUE'
+
+pba_ephemeris.admin_settings:
+  path: '/admin/config/content/ephemeris'
+  defaults:
+    _form: '\Drupal\pba_ephemeris\Form\Settings'
+    _title: 'Ephemeris settings'
+  requirements:
+    _permission: 'administer site configuration'
