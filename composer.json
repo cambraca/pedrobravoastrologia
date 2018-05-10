@@ -23,6 +23,7 @@
         "drupal/console": "^1.0.2",
         "drupal/core": "~8.5.3",
         "drupal/devel": "^1.2",
+        "drupal/google_analytics": "^2.2",
         "drupal/metatag": "^1.5",
         "drupal/pathauto": "^1.2",
         "drupal/token": "^1.1",
