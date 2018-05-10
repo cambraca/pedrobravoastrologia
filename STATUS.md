@@ -13,33 +13,28 @@ Done
 
 - Sidebar calendar
 
+- Auto-publish on cron (including posting the image/link to Facebook)
+
 
 To do
 -----
 
-- Meta tags
-
-  - Facebook/Twitter-specific tags
-
-- Auto-publish on cron
-
-  - Post to Facebook
-    <br>https://developers.facebook.com/docs/pages/publishing
-  - Config page with time of day to publish
-    <br>https://drupal.stackexchange.com/a/245887/3904
-    
-- Author page
-
-  - Photo
-  - Bio
-  - Design
-  
 - Content import
 
   - Prepare CSV (texts, image URLs)
   - Feed import (maybe just a very custom hook_update script to read from the CSV)
     <br>https://www.drupal.org/project/migrate_plus
-  
+
+- Meta tags
+
+  - Facebook/Twitter-specific tags
+
+- Author page
+
+  - Photo
+  - Bio
+  - Design
+
 - Search
 
   - Algolia setup
