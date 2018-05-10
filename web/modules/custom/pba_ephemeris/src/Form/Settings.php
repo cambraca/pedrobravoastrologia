@@ -45,25 +45,30 @@ class Settings extends ConfigFormBase {
       '#date_time_format' => 'H:i',
     ];
 
-    $form['post_to_facebook'] = [
+    $form['facebook'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Facebook'),
+    ];
+
+    $form['facebook']['post_to_facebook'] = [
       '#type' => 'checkbox',
       '#title' => 'Post to Facebook',
       '#default_value' => $config->get('post_to_facebook'),
     ];
 
-    $form['facebook_app_id'] = [
+    $form['facebook']['facebook_app_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Facebook App ID'),
       '#default_value' => $config->get('facebook_app_id'),
     ];
 
-    $form['facebook_app_secret'] = [
+    $form['facebook']['facebook_app_secret'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Facebook App Secret'),
       '#description' => $this->t('Leave empty if you don\'t want to change the value'),
     ];
 
-    $form['facebook_page_id'] = [
+    $form['facebook']['facebook_page_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Facebook Page ID'),
       '#default_value' => $config->get('facebook_page_id'),
@@ -97,14 +102,14 @@ class Settings extends ConfigFormBase {
         'query' => ['fb' => 1]
       ])->toString(), ['manage_pages', 'publish_pages']);
 
-      $form['facebook_login'] = [
+      $form['facebook']['facebook_login'] = [
         '#type' => 'link',
         '#title' => $this->t('Log into Facebook'),
         '#url' => Url::fromUri($loginUrl),
       ];
     }
 
-    $form['facebook_get_page_access_token'] = [
+    $form['facebook']['facebook_get_page_access_token'] = [
       '#type' => 'submit',
       '#value' => $this->t('Get page access token'),
       '#submit' => ['::getFbPageAccessToken'],
