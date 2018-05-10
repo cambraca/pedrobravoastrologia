@@ -91,7 +91,29 @@ class Settings extends ConfigFormBase {
       ];
     }
 
+    $form['facebook_get_page_access_token'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Get page access token'),
+      '#submit' => ['::getFbPageAccessToken'],
+    ];
+
     return parent::buildForm($form, $form_state);
+  }
+
+  public function getFbPageAccessToken(array &$form, FormStateInterface $form_state) {
+    $config = $this->config('pba_ephemeris.settings');
+
+    try {
+      $response = SocialMedia::facebook()
+        ->get('/me/accounts', $config->get('facebook_access_token'));
+    } catch (\Exception $e) {
+      \Drupal::messenger()
+        ->addError($e->getMessage());
+    }
+    dpm($response);
+
+    \Drupal::messenger()
+      ->addMessage('hi');
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
