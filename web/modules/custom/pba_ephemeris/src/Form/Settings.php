@@ -114,22 +114,20 @@ class Settings extends ConfigFormBase {
           $config->set('facebook_page_access_token', $page['access_token']);
           $config->save();
           $found = TRUE;
-          \Drupal::messenger()
-            ->addMessage($this->t('Page access token stored successfully!'));
           break;
         }
       }
-      if (!$found)
+      
+      if ($found)
+        \Drupal::messenger()
+          ->addMessage($this->t('Page access token stored successfully!'));
+      else
         \Drupal::messenger()
           ->addError($this->t('Could not get access to the Pedro Bravo page (id: 1502244163428127)'));
     } catch (\Exception $e) {
       \Drupal::messenger()
         ->addError($e->getMessage());
     }
-    dpm($response);
-
-    \Drupal::messenger()
-      ->addMessage('hi');
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
