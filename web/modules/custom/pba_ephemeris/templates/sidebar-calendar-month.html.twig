@@ -1,4 +1,4 @@
-{% set month_labels = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'] %}
+{% set month_labels = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'] %}
 {% set skip = date|date('N')-1 %}
 {% set end_day = date|date_modify("+1 month")|date_modify("-1 day")|date("j") %}
 {% spaceless %}
