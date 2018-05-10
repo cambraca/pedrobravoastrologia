@@ -66,6 +66,7 @@ class Settings extends ConfigFormBase {
           $accessToken = $helper->getAccessToken();
           if ($accessToken) {
             $config->set('facebook_access_token', $accessToken->getValue());
+            $config->save();
             \Drupal::messenger()
               ->addMessage($this->t('Access token stored successfully!'));
           }
@@ -106,6 +107,18 @@ class Settings extends ConfigFormBase {
     try {
       $response = SocialMedia::facebook()
         ->get('/me/accounts', $config->get('facebook_access_token'));
+      $body = $response->getDecodedBody();
+      $found = FALSE;
+      foreach ($body['data'] as $page) {
+        if ($page['id'] == 1502244163428127) {
+          $config->set('facebook_page_access_token', $page['access_token']);
+          $config->save();
+          break;
+        }
+      }
+      if (!$found)
+        \Drupal::messenger()
+          ->addError($this->t('Could not get access to the Pedro Bravo page (id: 1502244163428127)'));
     } catch (\Exception $e) {
       \Drupal::messenger()
         ->addError($e->getMessage());
