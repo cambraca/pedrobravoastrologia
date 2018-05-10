@@ -132,8 +132,8 @@ function pba_ephemeris_preprocess_sidebar_calendar_month(&$variables) {
   $query = \Drupal::entityQuery('node');
   $query->condition('type', 'post');
   $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
-  $query->condition('field_date', $from, '>=');
-  $query->condition('field_date', $to, '<');
+  $query->condition('field_date', $from->format('Y-m-d'), '>=');
+  $query->condition('field_date', $to->format('Y-m-d'), '<');
   $nids = $query->execute();
 
   if ($nids)

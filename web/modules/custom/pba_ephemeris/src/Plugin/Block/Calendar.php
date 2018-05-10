@@ -17,7 +17,7 @@ use Drupal\Core\Datetime\DrupalDateTime;
  */
 class Calendar extends BlockBase {
   public function build() {
-    $start = new DrupalDateTime('2015-10-03 8:34:59');
+    $start = new DrupalDateTime('2015-10-01');
     $now = new DrupalDateTime();
 
     $years = [];
@@ -31,14 +31,14 @@ class Calendar extends BlockBase {
       for ($month = $start_month; $month <= $end_month; $month++) {
         $months[] = [
           '#theme' => 'sidebar_calendar_month',
-          '#date' => new DrupalDateTime("$year-$month-1"),
+          '#date' => new DrupalDateTime($year . '-' . $month . '-01'),
           '#cache' => ['max-age' => 100000], //TODO: doesn't work like this
         ];
       }
 
       $years[] = [
         '#theme' => 'sidebar_calendar_year',
-        '#date' => new DrupalDateTime("$year-1-1"),
+        '#date' => new DrupalDateTime($year . '-01-01'),
         '#months' => $months,
       ];
       $is_first = FALSE;
