@@ -45,6 +45,12 @@ class Settings extends ConfigFormBase {
       '#date_time_format' => 'H:i',
     ];
 
+    $form['post_to_facebook'] = [
+      '#type' => 'checkbox',
+      '#title' => 'Post to Facebook',
+      '#default_value' => $config->get('post_to_facebook'),
+    ];
+
     $form['facebook_app_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Facebook App ID'),
@@ -143,6 +149,7 @@ class Settings extends ConfigFormBase {
 
     $config->set('publish_time', (string) $values['publish_time'])
       ->set('auto_publish', $values['auto_publish'])
+      ->set('post_to_facebook', $values['post_to_facebook'])
       ->set('facebook_app_id', $values['facebook_app_id'])
       ->set('facebook_page_id', $values['facebook_page_id']);
 

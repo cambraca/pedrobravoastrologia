@@ -180,6 +180,7 @@ function pba_ephemeris_cron() {
   $request_time = \Drupal::time()->getRequestTime();
   $config = \Drupal::configFactory()->getEditable('pba_ephemeris.settings');
 
+  $post_to_fb = $config->get('post_to_facebook');
   if (!$config->get('auto_publish'))
     return;
 
@@ -212,6 +213,9 @@ function pba_ephemeris_cron() {
   /** @var \Drupal\node\Entity\Node $post */
   foreach (\Drupal\node\Entity\Node::loadMultiple($nids) as $post) {
     $post->setPublished()->save();
+
+    if ($post_to_fb)
+      \Drupal\pba_ephemeris\SocialMedia::postToFacebook($post);
 
     \Drupal::logger('pba_ephemeris')
       ->info('Published post', ['link' => $post->toLink()->toString()]);
