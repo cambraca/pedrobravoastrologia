@@ -65,7 +65,7 @@ class Settings extends ConfigFormBase {
         try {
           $accessToken = $helper->getAccessToken();
           if ($accessToken) {
-            $config->set('facebook_access_token', $accessToken);
+            $config->set('facebook_access_token', $accessToken->getValue());
             \Drupal::messenger()
               ->addMessage($this->t('Access token stored successfully!'));
           }
