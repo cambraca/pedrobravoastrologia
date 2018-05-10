@@ -57,6 +57,12 @@ class Settings extends ConfigFormBase {
       '#description' => $this->t('Leave empty if you don\'t want to change the value'),
     ];
 
+    $form['facebook_app_page_id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Facebook App Page ID'),
+      '#default_value' => $config->get('facebook_app_page_id'),
+    ];
+
     $fb = SocialMedia::facebook();
     if ($fb) {
       $helper = $fb->getRedirectLoginHelper();
@@ -103,6 +109,7 @@ class Settings extends ConfigFormBase {
 
   public function getFbPageAccessToken(array &$form, FormStateInterface $form_state) {
     $config = $this->config('pba_ephemeris.settings');
+    $pageId = $config->get('facebook_app_page_id');
 
     try {
       $response = SocialMedia::facebook()
@@ -110,20 +117,20 @@ class Settings extends ConfigFormBase {
       $body = $response->getDecodedBody();
       $found = FALSE;
       foreach ($body['data'] as $page) {
-        if ($page['id'] == 1502244163428127) {
+        if ($page['id'] == $pageId) {
           $config->set('facebook_page_access_token', $page['access_token']);
           $config->save();
           $found = TRUE;
           break;
         }
       }
-      
+
       if ($found)
         \Drupal::messenger()
           ->addMessage($this->t('Page access token stored successfully!'));
       else
         \Drupal::messenger()
-          ->addError($this->t('Could not get access to the Pedro Bravo page (id: 1502244163428127)'));
+          ->addError($this->t('Could not get access to the Facebook page'));
     } catch (\Exception $e) {
       \Drupal::messenger()
         ->addError($e->getMessage());
@@ -136,7 +143,8 @@ class Settings extends ConfigFormBase {
 
     $config->set('publish_time', (string) $values['publish_time'])
       ->set('auto_publish', $values['auto_publish'])
-      ->set('facebook_app_id', $values['facebook_app_id']);
+      ->set('facebook_app_id', $values['facebook_app_id'])
+      ->set('facebook_app_page_id', $values['facebook_app_page_id']);
 
     if (trim($values['facebook_app_secret']))
       $config->set('facebook_app_secret', trim($values['facebook_app_secret']));
