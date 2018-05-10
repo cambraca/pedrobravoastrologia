@@ -5,6 +5,8 @@ namespace Drupal\pba_ephemeris\Form;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\pba_ephemeris\SocialMedia;
 
 class Settings extends ConfigFormBase {
 
@@ -42,15 +44,64 @@ class Settings extends ConfigFormBase {
       '#date_time_element' => 'time',
       '#date_time_format' => 'H:i',
     ];
+
+    $form['facebook_app_id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Facebook App ID'),
+      '#default_value' => $config->get('facebook_app_id'),
+    ];
+
+    $form['facebook_app_secret'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Facebook App Secret'),
+      '#description' => $this->t('Leave empty if you don\'t want to change the value'),
+    ];
+
+    $helper = SocialMedia::facebook()->getRedirectLoginHelper();
+
+    if (\Drupal::request()->query->get('fb') == 1) {
+      try {
+        $accessToken = $helper->getAccessToken();
+        if ($accessToken) {
+          $config->set('facebook_access_token', $accessToken);
+          \Drupal::messenger()
+            ->addMessage($this->t('Access token stored successfully!'));
+        } else {
+          \Drupal::messenger()
+            ->addError($this->t('Access token is empty'));
+        }
+      } catch (\Exception $e) {
+        \Drupal::logger('pba_ephemeris')
+          ->error('Error on Facebook login callback', ['exception' => $e]);
+      }
+    }
+
+    $loginUrl = $helper->getLoginUrl(Url::fromRoute('<current>', [], [
+      'absolute' => TRUE,
+      'query' => ['fb' => 1]
+    ])->toString());
+
+    $form['facebook_login'] = [
+      '#type' => 'link',
+      '#title' => $this->t('Log into Facebook'),
+      '#url' => Url::fromUri($loginUrl),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
-    $this->config('pba_ephemeris.settings')
-      ->set('publish_time', (string) $values['publish_time'])
+    $config = $this->config('pba_ephemeris.settings');
+
+    $config->set('publish_time', (string) $values['publish_time'])
       ->set('auto_publish', $values['auto_publish'])
-      ->save();
+      ->set('facebook_app_id', $values['facebook_app_id']);
+
+    if (trim($values['facebook_app_secret']))
+      $config->set('facebook_app_secret', trim($values['facebook_app_secret']));
+
+    $config->save();
     parent::submitForm($form, $form_state);
   }
 
