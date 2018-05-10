@@ -6,8 +6,16 @@ use Drupal\node\Entity\Node;
 use Facebook\Facebook;
 
 class SocialMedia {
+
+  /**
+   * @return \Facebook\Facebook|null
+   */
   static function facebook() {
     $config = \Drupal::configFactory()->get('pba_ephemeris.settings');
+
+    if (!$config->get('facebook_app_id'))
+      return NULL;
+
     return new Facebook([
       'app_id' => $config->get('facebook_app_id'),
       'app_secret' => $config->get('facebook_app_secret'),

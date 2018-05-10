@@ -57,35 +57,39 @@ class Settings extends ConfigFormBase {
       '#description' => $this->t('Leave empty if you don\'t want to change the value'),
     ];
 
-    $helper = SocialMedia::facebook()->getRedirectLoginHelper();
+    $fb = SocialMedia::facebook();
+    if ($fb) {
+      $helper = $fb->getRedirectLoginHelper();
 
-    if (\Drupal::request()->query->get('fb') == 1) {
-      try {
-        $accessToken = $helper->getAccessToken();
-        if ($accessToken) {
-          $config->set('facebook_access_token', $accessToken);
-          \Drupal::messenger()
-            ->addMessage($this->t('Access token stored successfully!'));
-        } else {
-          \Drupal::messenger()
-            ->addError($this->t('Access token is empty'));
+      if (\Drupal::request()->query->get('fb') == 1) {
+        try {
+          $accessToken = $helper->getAccessToken();
+          if ($accessToken) {
+            $config->set('facebook_access_token', $accessToken);
+            \Drupal::messenger()
+              ->addMessage($this->t('Access token stored successfully!'));
+          }
+          else {
+            \Drupal::messenger()
+              ->addError($this->t('Access token is empty'));
+          }
+        } catch (\Exception $e) {
+          \Drupal::logger('pba_ephemeris')
+            ->error('Error on Facebook login callback', ['exception' => $e]);
         }
-      } catch (\Exception $e) {
-        \Drupal::logger('pba_ephemeris')
-          ->error('Error on Facebook login callback', ['exception' => $e]);
       }
+
+      $loginUrl = $helper->getLoginUrl(Url::fromRoute('<current>', [], [
+        'absolute' => TRUE,
+        'query' => ['fb' => 1]
+      ])->toString());
+
+      $form['facebook_login'] = [
+        '#type' => 'link',
+        '#title' => $this->t('Log into Facebook'),
+        '#url' => Url::fromUri($loginUrl),
+      ];
     }
-
-    $loginUrl = $helper->getLoginUrl(Url::fromRoute('<current>', [], [
-      'absolute' => TRUE,
-      'query' => ['fb' => 1]
-    ])->toString());
-
-    $form['facebook_login'] = [
-      '#type' => 'link',
-      '#title' => $this->t('Log into Facebook'),
-      '#url' => Url::fromUri($loginUrl),
-    ];
 
     return parent::buildForm($form, $form_state);
   }
