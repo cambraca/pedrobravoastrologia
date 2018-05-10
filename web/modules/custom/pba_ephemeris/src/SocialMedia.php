@@ -13,7 +13,7 @@ class SocialMedia {
   static function facebook() {
     $config = \Drupal::configFactory()->get('pba_ephemeris.settings');
 
-    if (!$config->get('facebook_app_id'))
+    if (!$config->get('facebook_app_id') || !$config->get('facebook_page_access_token'))
       return NULL;
 
     return new Facebook([
@@ -25,6 +25,13 @@ class SocialMedia {
   static function postToFacebook(Node $node) {
     if ($node->bundle() !== 'post' || !$node->isPublished())
       return;
+
+    $fb = self::facebook();
+    if (!$fb)
+      return;
+
+    $config = \Drupal::configFactory()->get('pba_ephemeris.settings');
+    $access_token = $config->get('facebook_page_access_token');
 
     /** @var \Drupal\file\Entity\File $image */
     $image = $node->get('field_image')->entity;
@@ -41,7 +48,7 @@ class SocialMedia {
     ];
 
     try {
-      self::facebook()->post('/me/photos', $data);
+      $fb->post('/me/photos', $data, $access_token);
     } catch(\Exception $e) {
       \Drupal::logger('pba_ephemeris')
         ->error('Error posting photo to Facebook', ['exception' => $e]);
