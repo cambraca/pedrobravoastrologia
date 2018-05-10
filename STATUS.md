@@ -15,19 +15,13 @@ Done
 
 - Auto-publish on cron (including posting the image/link to Facebook)
 
+- Content import (images only)
+
 
 To do
 -----
 
-- Content import
-
-  - Prepare CSV (texts, image URLs)
-  - Feed import (maybe just a very custom hook_update script to read from the CSV)
-    <br>https://www.drupal.org/project/migrate_plus
-
-- Meta tags
-
-  - Facebook/Twitter-specific tags
+- Content import (texts)
 
 - Author page
 
