@@ -113,6 +113,9 @@ class Settings extends ConfigFormBase {
         if ($page['id'] == 1502244163428127) {
           $config->set('facebook_page_access_token', $page['access_token']);
           $config->save();
+          $found = TRUE;
+          \Drupal::messenger()
+            ->addMessage($this->t('Page access token stored successfully!'));
           break;
         }
       }
