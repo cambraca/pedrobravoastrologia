@@ -1,0 +1,5 @@
+pba_ephemeris.social_media:
+  title: 'Social media'
+  route_name: pba_ephemeris.social_media
+  base_route: entity.node.canonical
+  weight: 100

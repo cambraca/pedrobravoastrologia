@@ -22,13 +22,18 @@ class SocialMedia {
     ]);
   }
 
+  /**
+   * @param \Drupal\node\Entity\Node $node
+   *
+   * @return bool
+   */
   static function postToFacebook(Node $node) {
     if ($node->bundle() !== 'post' || !$node->isPublished())
-      return;
+      return FALSE;
 
     $fb = self::facebook();
     if (!$fb)
-      return;
+      return FALSE;
 
     $config = \Drupal::configFactory()->get('pba_ephemeris.settings');
     $access_token = $config->get('facebook_page_access_token');
@@ -38,7 +43,7 @@ class SocialMedia {
     if (!$image) {
       \Drupal::logger('pba_ephemeris')
         ->error('Trying to post node without image to Facebook', ['nid' => $node->id()]);
-      return;
+      return FALSE;
     }
 
     $data = [
@@ -52,6 +57,9 @@ class SocialMedia {
     } catch(\Exception $e) {
       \Drupal::logger('pba_ephemeris')
         ->error('Error posting photo to Facebook', ['exception' => $e]);
+      return FALSE;
     }
+
+    return TRUE;
   }
 }

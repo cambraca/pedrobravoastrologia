@@ -13,3 +13,15 @@ pba_ephemeris.admin_settings:
     _title: 'Ephemeris settings'
   requirements:
     _permission: 'administer site configuration'
+
+pba_ephemeris.social_media:
+  path: '/node/{node}/social-media'
+  defaults:
+    _form: '\Drupal\pba_ephemeris\Form\SocialMedia'
+    _title: 'Social media'
+  requirements:
+    _permission: 'administer nodes'
+  options:
+    parameters:
+      node:
+        type: 'entity:node'
