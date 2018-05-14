@@ -837,3 +837,23 @@ function pba_ephemeris_update_8001() {
     $post->save();
   }
 }
+
+function pba_ephemeris_update_8002() {
+  $texts = json_decode(file_get_contents(drupal_get_path('module', 'pba_ephemeris').'/content/processed.txt'), TRUE);
+  $count = 0;
+  foreach ($texts as $date => $html) {
+    $query = \Drupal::entityQuery('node');
+    $query->condition('type', 'post');
+    $query->condition('field_date', str_replace('/', '-', $date));
+    $query->notExists('body');
+    $nids = $query->execute();
+    if (!$nids)
+      return;
+    $node = \Drupal\node\Entity\Node::load(current($nids));
+    $node->set('body', ['format' => 'basic_html', 'value' => $html]);
+    $node->save();
+    $count++;
+  }
+  \Drupal::logger('pba_ephemeris')
+    ->info('Updated body field for posts', ['count' => $count]);
+}
