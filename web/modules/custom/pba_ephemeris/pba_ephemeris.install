@@ -848,7 +848,7 @@ function pba_ephemeris_update_8002() {
     $query->notExists('body');
     $nids = $query->execute();
     if (!$nids)
-      return;
+      continue;
     $node = \Drupal\node\Entity\Node::load(current($nids));
     $node->set('body', ['format' => 'basic_html', 'value' => $html]);
     $node->save();
