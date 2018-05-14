@@ -40,9 +40,12 @@
         background: $brand_blue
         width: 16px
         height: 16px
-        font-size: 0
+        line-height: 16px
+        font-size: 10px
         display: block
         border-radius: 50%
+        color: $brand_blue // Invisible
+        @include hover-color($bg_gray)
 
         &.active:before
           content: ""

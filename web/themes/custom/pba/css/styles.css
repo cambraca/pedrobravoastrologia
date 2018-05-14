@@ -334,9 +334,16 @@ article.post.teaser .field_image img {
         background: #226591;
         width: 16px;
         height: 16px;
-        font-size: 0;
+        line-height: 16px;
+        font-size: 10px;
         display: block;
-        border-radius: 50%; }
+        border-radius: 50%;
+        color: #226591;
+        transition: 0.4s color; }
+        #sidebar-calendar table td a:hover, #sidebar-calendar table td a:active, #sidebar-calendar table td a:focus {
+          outline: none;
+          color: #ebebeb;
+          transition-duration: 0.1s; }
         #sidebar-calendar table td a.active:before {
           content: "";
           display: block;
