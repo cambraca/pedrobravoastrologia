@@ -47,6 +47,9 @@
         color: $brand_blue // Invisible
         @include hover-color($bg_gray)
 
+        &.unpublished
+          opacity: .4
+
         &.active:before
           content: ""
           display: block

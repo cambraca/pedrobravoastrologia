@@ -72,7 +72,11 @@
  * @ingroup themeable
  */
 #}
+{% if node.isPublished() %}
 <article{{ attributes.addClass(node.bundle()).addClass(view_mode) }}>
+{% else %}
+<article{{ attributes.addClass(node.bundle()).addClass(view_mode).addClass("unpublished") }}>
+{% endif %}
 
   {{ title_prefix }}
   {% if not page %}

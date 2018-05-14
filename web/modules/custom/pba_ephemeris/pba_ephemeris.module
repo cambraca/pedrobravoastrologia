@@ -29,7 +29,8 @@ function pba_ephemeris_form_node_post_form_alter(&$form, \Drupal\Core\Form\FormS
 function _pba_ephemeris_adjacent_post(\Drupal\node\Entity\Node $node, $direction = 'prev') {
   $query = \Drupal::entityQuery('node');
   $query->condition('type', 'post');
-  $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
+  if (\Drupal::currentUser()->isAnonymous())
+    $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
   $query->condition('field_date', $node->get('field_date')->value, $direction === 'next' ? '>' : '<');
   $query->sort('field_date', $direction === 'next' ? 'ASC' : 'DESC');
   $query->range(0, 1);
@@ -46,6 +47,13 @@ function pba_ephemeris_entity_view_alter(array &$build, Drupal\Core\Entity\Entit
   if ($entity->getEntityTypeId() !== 'node' || $entity->bundle() !== 'post') {
     return;
   }
+
+  if ($entity->field_image->entity)
+    $build['body']['#access'] = FALSE;
+
+  if (!$entity->isPublished())
+    $build['#attributes']['class'][] = 'unpublished';
+
   switch ($display->getOriginalMode()) {
     case 'full':
       $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
@@ -131,19 +139,25 @@ function pba_ephemeris_preprocess_sidebar_calendar_month(&$variables) {
 
   $query = \Drupal::entityQuery('node');
   $query->condition('type', 'post');
-  $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
+  if (\Drupal::currentUser()->isAnonymous())
+    $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
   $query->condition('field_date', $from->format('Y-m-d'), '>=');
   $query->condition('field_date', $to->format('Y-m-d'), '<');
   $nids = $query->execute();
 
   if ($nids)
-    /** @var \Drupal\node\Entity\Node $post */
     foreach (\Drupal\node\Entity\Node::loadMultiple($nids) as $post) {
+      /** @var \Drupal\node\Entity\Node $post */
       $date = new \Drupal\Core\Datetime\DrupalDateTime($post->get('field_date')->value);
+      $class = [];
+      if ($current_post && $post->id() === $current_post->id())
+        $class[] = 'active';
+      if (!$post->isPublished())
+        $class[] = 'unpublished';
       $posts_by_date[intval($date->format('j'))] = [
         'url' => $post->toUrl(),
         'date' => $date,
-        'class' => $current_post && $post->id() === $current_post->id() ? 'active' : NULL,
+        'class' => implode(' ', $class),
       ];
     }
 
