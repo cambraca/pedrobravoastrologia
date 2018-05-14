@@ -15,7 +15,7 @@ Done
 
 - Auto-publish on cron (including posting the image/link to Facebook)
 
-- Content import (images only)
+- Content import
 
 
 To do
@@ -24,8 +24,6 @@ To do
 - Move access tokens and other sensitive info from config to state
   https://www.drupal.org/files/issues/2795115-6.patch
   https://www.drupal.org/project/google_analytics_reports/issues/2795115
-
-- Content import (texts)
 
 - Change site language to Spanish (remember to check tooltips on sidebar calendar).
 
