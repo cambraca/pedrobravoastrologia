@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e94c6b056621e5ac2a81f03126d98c4b",
+    "content-hash": "a60e101f081cf7d5344b90873cc1be48",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -69,6 +69,56 @@
                 "zip"
             ],
             "time": "2016-11-03T16:10:31+00:00"
+        },
+        {
+            "name": "algolia/algoliasearch-client-php",
+            "version": "1.25.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/algoliasearch-client-php.git",
+                "reference": "805021ea52630756d2da01d482309a2fdc47d3c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/805021ea52630756d2da01d482309a2fdc47d3c0",
+                "reference": "805021ea52630756d2da01d482309a2fdc47d3c0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "AlgoliaSearch": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Algolia Team",
+                    "email": "contact@algolia.com"
+                },
+                {
+                    "name": "Ryan T. Catlin",
+                    "email": "ryan.catlin@gmail.com"
+                },
+                {
+                    "name": "Jonathan H. Wage",
+                    "email": "jonwage@gmail.com"
+                }
+            ],
+            "description": "Algolia Search API Client for PHP",
+            "homepage": "https://github.com/algolia/algoliasearch-client-php",
+            "time": "2018-03-02T13:24:10+00:00"
         },
         {
             "name": "asm89/stack-cors",
@@ -2262,6 +2312,130 @@
             "homepage": "https://www.drupal.org/project/pathauto",
             "support": {
                 "source": "http://cgit.drupalcode.org/pathauto"
+            }
+        },
+        {
+            "name": "drupal/search_api",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/search_api",
+                "reference": "8.x-1.8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/search_api-8.x-1.8.zip",
+                "reference": "8.x-1.8",
+                "shasum": "04d7b3b680e84aad086a61fb9eb4ffe77dc278e4"
+            },
+            "require": {
+                "drupal/core": "^8.4"
+            },
+            "require-dev": {
+                "drupal/search_api_autocomplete": "@dev",
+                "drupal/search_api_db": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.8",
+                    "datestamp": "1523872384",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Seidl",
+                    "homepage": "https://www.drupal.org/u/drunken-monkey"
+                },
+                {
+                    "name": "Nick Veenhof",
+                    "homepage": "https://www.drupal.org/u/nick_vh"
+                },
+                {
+                    "name": "See other contributors",
+                    "homepage": "https://www.drupal.org/node/790418/committers"
+                }
+            ],
+            "description": "Provides a generic framework for modules offering search capabilities.",
+            "homepage": "https://www.drupal.org/project/search_api",
+            "support": {
+                "source": "http://git.drupal.org/project/search_api.git",
+                "issues": "https://www.drupal.org/project/issues/search_api",
+                "irc": "irc://irc.freenode.org/drupal-search-api"
+            }
+        },
+        {
+            "name": "drupal/search_api_algolia",
+            "version": "1.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/search_api_algolia",
+                "reference": "8.x-1.0-alpha1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/search_api_algolia-8.x-1.0-alpha1.zip",
+                "reference": "8.x-1.0-alpha1",
+                "shasum": "cbc38bd503ef06804ff185e2299d3b8869bb5ab1"
+            },
+            "require": {
+                "algolia/algoliasearch-client-php": ">=1.6.3",
+                "drupal/core": "~8.0",
+                "drupal/search_api": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-alpha1",
+                    "datestamp": "1475100842",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Beltofte",
+                    "homepage": "https://www.drupal.org/u/beltofte"
+                },
+                {
+                    "name": "Jonas Krat",
+                    "homepage": "https://www.drupal.org/u/jonasdk"
+                },
+                {
+                    "name": "mlbrgl",
+                    "homepage": "https://www.drupal.org/user/489214"
+                }
+            ],
+            "description": "Provides integration with the Algolia search engine.",
+            "homepage": "https://www.drupal.org/project/search_api_algolia",
+            "support": {
+                "source": "http://git.drupal.org/project/search_api_algolia.git",
+                "issues": "https://www.drupal.org/project/issues/search_api_algolia"
             }
         },
         {
@@ -5568,7 +5742,7 @@
                 "testing",
                 "web"
             ],
-            "time": "2018-01-07 17:25:05"
+            "time": "2018-01-07T17:25:05+00:00"
         },
         {
             "name": "behat/mink-browserkit-driver",
@@ -5740,7 +5914,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2018-01-07 19:17:08"
+            "time": "2018-01-07T19:17:08+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -7654,7 +7828,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "drupal/auto_entitylabel": 10
+        "drupal/auto_entitylabel": 10,
+        "drupal/search_api_algolia": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,

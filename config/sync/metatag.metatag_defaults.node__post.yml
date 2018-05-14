@@ -6,3 +6,9 @@ id: node__post
 label: 'Content: Post'
 tags:
   image_src: '[node:field_image]'
+  og_image: '[node:field_image]'
+  article_published_time: '[node:field_date:date:custom:Y-m-d]'
+  twitter_cards_image: '[node:field_image]'
+  twitter_cards_image_alt: '[node:summary]'
+  twitter_cards_title: '[current-page:title]'
+  twitter_cards_type: photo

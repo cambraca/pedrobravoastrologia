@@ -17,13 +17,18 @@ module:
   filter: 0
   google_analytics: 0
   image: 0
+  language: 0
   link: 0
   menu_ui: 0
   metatag: 0
+  metatag_open_graph: 0
+  metatag_twitter_cards: 0
   node: 0
   page_cache: 0
   path: 0
   pba_ephemeris: 0
+  search_api: 0
+  search_api_algolia: 0
   system: 0
   text: 0
   token: 0

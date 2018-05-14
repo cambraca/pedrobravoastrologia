@@ -9,14 +9,14 @@ label: Post
 type: 'canonical_entities:node'
 pattern: 'efemerides/[node:field_date:date:custom:"Y"]/[node:field_date:date:custom:"m"]/[node:field_date:date:custom:"d"]'
 selection_criteria:
-  96129ae4-4a2c-4ccd-bf4a-4cab7b006dd8:
+  5f0b6fc6-c500-4f22-8a1a-630efa3553e7:
     id: node_type
     bundles:
       post: post
     negate: false
     context_mapping:
       node: node
-    uuid: 96129ae4-4a2c-4ccd-bf4a-4cab7b006dd8
+    uuid: 5f0b6fc6-c500-4f22-8a1a-630efa3553e7
 selection_logic: and
 weight: -5
 relationships: {  }

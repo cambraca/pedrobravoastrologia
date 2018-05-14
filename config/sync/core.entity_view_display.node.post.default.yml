@@ -28,4 +28,5 @@ content:
 hidden:
   body: true
   field_date: true
+  langcode: true
   links: true
