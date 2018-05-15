@@ -25,8 +25,6 @@ To do
   https://www.drupal.org/files/issues/2795115-6.patch
   https://www.drupal.org/project/google_analytics_reports/issues/2795115
 
-- Change site language to Spanish (remember to check tooltips on sidebar calendar).
-
 - Author page
 
   - Photo
