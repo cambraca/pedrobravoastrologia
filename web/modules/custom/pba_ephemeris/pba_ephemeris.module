@@ -48,8 +48,11 @@ function pba_ephemeris_entity_view_alter(array &$build, Drupal\Core\Entity\Entit
     return;
   }
 
-  if ($entity->field_image->entity)
+  if ($entity->field_image->entity) {
     $build['body']['#access'] = FALSE;
+    if ($display->getOriginalMode() === 'full')
+      $build['field_image'][0]['#item']->set('alt', trim(strip_tags($entity->body->value)));
+  }
 
   if (!$entity->isPublished())
     $build['#attributes']['class'][] = 'unpublished';

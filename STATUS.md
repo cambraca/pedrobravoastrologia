@@ -46,5 +46,3 @@ To do
 - 404 / 403 pages
 
 - Sidebar calendar: cache output by month (invalidate on post node)
-
-- Post body as alt text for the image (accessibility issue)
