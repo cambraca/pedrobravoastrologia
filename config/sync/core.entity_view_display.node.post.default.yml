@@ -10,12 +10,20 @@ dependencies:
     - node.type.post
   module:
     - image
+    - text
     - user
 id: node.post.default
 targetEntityType: node
 bundle: post
 mode: default
 content:
+  body:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_image:
     weight: 0
     label: hidden
@@ -26,7 +34,6 @@ content:
     type: image
     region: content
 hidden:
-  body: true
   field_date: true
   langcode: true
   links: true

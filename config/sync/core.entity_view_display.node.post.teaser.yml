@@ -11,12 +11,20 @@ dependencies:
     - node.type.post
   module:
     - image
+    - text
     - user
 id: node.post.teaser
 targetEntityType: node
 bundle: post
 mode: teaser
 content:
+  body:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
   field_image:
     type: image
     weight: 0
@@ -27,7 +35,6 @@ content:
       image_link: content
     third_party_settings: {  }
 hidden:
-  body: true
   field_date: true
   langcode: true
   links: true
