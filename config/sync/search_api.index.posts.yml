@@ -5,8 +5,10 @@ dependencies:
   config:
     - field.storage.node.body
     - field.storage.node.field_date
+    - field.storage.node.field_image
     - search_api.server.algolia
   module:
+    - file
     - search_api
     - node
 id: posts
@@ -34,6 +36,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.node.field_date
+  image:
+    label: 'Image » File » URI » Root-relative file URL'
+    datasource_id: 'entity:node'
+    property_path: 'field_image:entity:uri:url'
+    type: string
+    dependencies:
+      config:
+        - field.storage.node.field_image
+      module:
+        - file
 datasource_settings:
   'entity:node':
     bundles:
@@ -59,10 +71,10 @@ processor_settings:
     weights:
       preprocess_index: -15
       preprocess_query: -15
+  entity_status: {  }
   add_url: {  }
   rendered_item: {  }
   aggregated_field: {  }
-  entity_status: {  }
 tracker_settings:
   default:
     indexing_order: fifo
