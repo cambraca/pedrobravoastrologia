@@ -24,12 +24,26 @@
       &.is-active
         display: inline
 
-  @media #{$mobile-portrait--mobile-landscape}
+  @media #{$mobile-portrait}
     #header-toggle:checked ~ header &
+      ul
+        margin-top: 2 * $margin
+
       li
         display: block
         text-align: center
 
       a
         display: block
-        margin: 0 0 $margin
+        margin: $margin 0 0
+
+  @media #{$mobile-landscape}
+    #header-toggle:checked ~ header &
+      ul
+        display: flex
+        justify-content: space-around
+        margin: 20vh 60px 0
+
+      a
+        display: inline
+        margin: 0 $margin
