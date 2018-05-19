@@ -12,7 +12,7 @@ img
     position: fixed
     top: 35px
     left: $margin
-    z-index: 99999999
+    z-index: 150
     font-size: 24px
     color: $dim_blue
     @include hover-color($brand_blue)
@@ -21,12 +21,18 @@ img
     @media #{$mobile-portrait--mobile-landscape}
       display: block
 
+    @media #{$mobile-portrait}
+      position: absolute
+
     @media #{$mobile-landscape}
       left: 20px
       top: 35px + 0 * 50px
 
   #header-toggle:checked + #header-toggle-label
+    z-index: 300
     color: $brand_blue
+    @media #{$mobile-portrait}
+      position: fixed
 
   #header-toggle
     display: none
@@ -47,6 +53,7 @@ img
 
   @media #{$mobile-portrait--mobile-landscape}
     #header-toggle:checked ~ header
+      z-index: 200
       background-color: rgba($bg_gray, .98)
       position: fixed
       padding: 2 * $margin
@@ -55,7 +62,7 @@ img
     #header-toggle:checked ~ footer
       position: fixed
       bottom: 0
-      z-index: 110
+      z-index: 250
       background-color: transparent
 
   > main
@@ -66,7 +73,7 @@ img
     position: fixed
     top: 30px
     right: $margin
-    z-index: 99999999
+    z-index: 150
     font-size: 24px
     color: $dim_blue
     @include hover-color($brand_blue)
@@ -75,12 +82,18 @@ img
     @media #{$mobile-portrait--tablet}
       display: block
 
+    @media #{$mobile-portrait}
+      position: absolute
+
     @media #{$mobile-landscape}
       left: 20px
       top: 35px + 1 * 50px
 
   #sidebar-toggle:checked + #sidebar-toggle-label
+    z-index: 300
     color: $brand_blue
+    @media #{$mobile-portrait}
+      position: fixed
 
   #sidebar-toggle
     display: none
