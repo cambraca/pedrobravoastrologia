@@ -82,7 +82,8 @@ function pba_ephemeris_entity_view_alter(array &$build, Drupal\Core\Entity\Entit
       }
       break;
     case 'teaser':
-      $build['title']['#access'] = FALSE;
+      if ($entity->field_image->entity)
+        $build['title']['#access'] = FALSE;
       break;
   }
 }
