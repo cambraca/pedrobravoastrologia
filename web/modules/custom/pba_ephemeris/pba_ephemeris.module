@@ -21,6 +21,34 @@ function pba_ephemeris_form_node_post_form_alter(&$form, \Drupal\Core\Form\FormS
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ * Adds a "Save and edit next post" button.
+ */
+function pba_ephemeris_form_node_post_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  /** @var \Drupal\node\NodeForm $node_form */
+  $node_form = $form_state->getBuildInfo()['callback_object'];
+  $post = $node_form->getEntity();
+  $next = _pba_ephemeris_adjacent_post($post, 'next');
+  if ($next->isPublished())
+    return;
+
+  $form['actions']['submit_and_edit_next_post'] = $form['actions']['submit'];
+  $form['actions']['submit_and_edit_next_post']['#submit'][] = 'pba_ephemeris_edit_next_post';
+  $form['actions']['submit_and_edit_next_post']['#value'] = \Drupal::translation()->translate('Save and edit next post');
+}
+
+function pba_ephemeris_edit_next_post($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  /** @var \Drupal\node\NodeForm $node_form */
+  $node_form = $form_state->getBuildInfo()['callback_object'];
+  $post = $node_form->getEntity();
+  $next = _pba_ephemeris_adjacent_post($post, 'next');
+  if ($next->isPublished())
+    return;
+
+  $form_state->setRedirectUrl($next->toUrl('edit-form'));
+}
+
+/**
  * @param \Drupal\node\Entity\Node $node
  * @param string $direction
  *
