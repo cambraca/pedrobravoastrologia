@@ -29,7 +29,7 @@ function pba_ephemeris_form_node_post_edit_form_alter(&$form, \Drupal\Core\Form\
   $node_form = $form_state->getBuildInfo()['callback_object'];
   $post = $node_form->getEntity();
   $next = _pba_ephemeris_adjacent_post($post, 'next');
-  if ($next->isPublished())
+  if (!$next || $next->isPublished())
     return;
 
   $form['actions']['submit_and_edit_next_post'] = $form['actions']['submit'];
@@ -42,7 +42,7 @@ function pba_ephemeris_edit_next_post($form, \Drupal\Core\Form\FormStateInterfac
   $node_form = $form_state->getBuildInfo()['callback_object'];
   $post = $node_form->getEntity();
   $next = _pba_ephemeris_adjacent_post($post, 'next');
-  if ($next->isPublished())
+  if (!$next || $next->isPublished())
     return;
 
   $form_state->setRedirectUrl($next->toUrl('edit-form'));
