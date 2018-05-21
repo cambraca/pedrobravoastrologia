@@ -35,6 +35,9 @@ async function handleEphemerisClick(event) {
     const template = document.createElement('template');
     template.innerHTML = data.rendered.trim();
     parent.appendChild(template.content.querySelector(fullPostSelector));
+    for (const a of parent.querySelectorAll('a[href^=\\/efemerides\\/]')) {
+      a.addEventListener('click', handleEphemerisClick);
+    }
     for (const a of document.querySelectorAll('#sidebar-calendar a.active'))
       a.classList.remove('active');
     calendarLink.classList.add('active');
@@ -48,5 +51,5 @@ async function handleEphemerisClick(event) {
 
 // Apply "js-mode" to post links.
 for (const a of document.querySelectorAll('a[href^=\\/efemerides\\/]')) {
-  a.addEventListener('click', handleEphemerisClick)
+  a.addEventListener('click', handleEphemerisClick);
 }
