@@ -4,3 +4,12 @@
     outline: none
     color: $color
     transition-duration: .1s
+
+@mixin loading
+  animation: rotate 1.5s infinite linear
+
+@keyframes rotate
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)

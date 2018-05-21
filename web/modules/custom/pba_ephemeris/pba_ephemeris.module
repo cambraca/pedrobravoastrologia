@@ -108,6 +108,10 @@ function pba_ephemeris_entity_view_alter(array &$build, Drupal\Core\Entity\Entit
           'node' => $view_builder->view($next, 'teaser'),
         ];
       }
+
+      // TODO: This shouldn't be necessary.
+      $build['title']['#access'] = FALSE;
+
       break;
     case 'teaser':
       if ($entity->field_image->entity)

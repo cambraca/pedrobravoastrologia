@@ -50,7 +50,7 @@
         &.unpublished
           opacity: .4
 
-        &.active:before
+        &:before
           content: ""
           display: block
           position: absolute
@@ -59,4 +59,13 @@
           margin-left: -4px
           margin-top: -4px
           border-radius: 50%
+          border: 2px solid $bg_gray
+          transition: 1s all
+
+        &.active:before, &.loading:before
           border: 2px solid $accent_red
+          @include loading
+
+        &.loading:before
+          border-right-color: $bg_gray
+          border-left-color: $bg_gray

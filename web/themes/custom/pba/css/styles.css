@@ -1,4 +1,9 @@
 @import url(base/reset.css);
+@keyframes rotate {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
 html {
   font-size: 16px; }
 
@@ -389,7 +394,7 @@ article.post.teaser.unpublished > .body {
           transition-duration: 0.1s; }
         #sidebar-calendar table td a.unpublished {
           opacity: 0.4; }
-        #sidebar-calendar table td a.active:before {
+        #sidebar-calendar table td a:before {
           content: "";
           display: block;
           position: absolute;
@@ -398,6 +403,13 @@ article.post.teaser.unpublished > .body {
           margin-left: -4px;
           margin-top: -4px;
           border-radius: 50%;
-          border: 2px solid #dc3448; }
+          border: 2px solid #ebebeb;
+          transition: 1s all; }
+        #sidebar-calendar table td a.active:before, #sidebar-calendar table td a.loading:before {
+          border: 2px solid #dc3448;
+          animation: rotate 1.5s infinite linear; }
+        #sidebar-calendar table td a.loading:before {
+          border-right-color: #ebebeb;
+          border-left-color: #ebebeb; }
 
 /*# sourceMappingURL=styles.css.map */

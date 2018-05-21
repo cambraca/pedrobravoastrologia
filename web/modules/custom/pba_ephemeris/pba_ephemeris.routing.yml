@@ -6,6 +6,23 @@ pba_ephemeris.latest:
   requirements:
     _access: 'TRUE'
 
+pba_ephemeris.js:
+  path: '/js/efemerides/{y}/{m}/{d}'
+  defaults:
+    _controller: '\Drupal\pba_ephemeris\Controller\PostController::js'
+  requirements:
+    _access: 'TRUE'
+    y: '\d{4}'
+    m: '\d{2}'
+    d: '\d{2}'
+
+pba_ephemeris.js_latest:
+  path: '/js/efemerides'
+  defaults:
+    _controller: '\Drupal\pba_ephemeris\Controller\PostController::jsLatest'
+  requirements:
+    _access: 'TRUE'
+
 pba_ephemeris.admin_settings:
   path: '/admin/config/content/ephemeris'
   defaults:

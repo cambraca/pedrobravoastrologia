@@ -79,16 +79,6 @@
     <aside id="sidebar">
       {{ page.sidebar }}
     </aside>
-    <script>
-      var sidebar = document.getElementById('sidebar');
-      sidebar.scrollTop = sidebar.scrollHeight;
-      var sidebarCalendar = document.getElementById('sidebar-calendar');
-      if (sidebarCalendar) {
-        var active = sidebarCalendar.getElementsByClassName('active');
-        if (active.length > 0)
-          active[0].scrollIntoView({behavior: "instant"});
-      }
-    </script>
   {% endif %}
 
   <footer role="contentinfo">

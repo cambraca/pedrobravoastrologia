@@ -2,7 +2,6 @@
 
 namespace Drupal\pba_ephemeris\Plugin\Block;
 
-use Drupal\Component\Datetime\DateTimePlus;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Datetime\DrupalDateTime;
 
@@ -48,6 +47,11 @@ class Calendar extends BlockBase {
       '#theme' => 'sidebar_calendar',
       '#years' => $years,
       '#cache' => ['max-age' => 0],
+      '#attached' => [
+        'library' => [
+          'pba_ephemeris/calendar',
+        ],
+      ],
     ];
   }
 }
