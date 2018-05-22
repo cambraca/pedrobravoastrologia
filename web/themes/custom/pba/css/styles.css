@@ -121,7 +121,8 @@ img {
     @media screen and (min-width: 560px) and (max-width: 749px) {
       #page #sidebar-toggle-label {
         left: 20px;
-        top: 85px; } }
+        top: 85px;
+        right: auto; } }
   #page #sidebar-toggle:checked + #sidebar-toggle-label {
     z-index: 300;
     color: #226591; }
