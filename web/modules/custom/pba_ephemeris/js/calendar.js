@@ -14,6 +14,8 @@ if (sidebarCalendar) {
 
 const postCache = [];
 const POST_CACHE_LIMIT = 50;
+const imageCache = [];
+const IMAGE_CACHE_LIMIT = 50;
 
 function loadPost(data) {
   const post = document.querySelector('article.post.full');
@@ -81,12 +83,33 @@ async function preloadAdjacentPost(url) {
   postCache.push({url: url, data: data});
   if (postCache.length > POST_CACHE_LIMIT)
     postCache.shift();
+
+  // Preload images
+  const template = document.createElement('template');
+  template.innerHTML = data.rendered.trim();
+  for (const img of template.content.querySelectorAll('img')) {
+    const imageUrl = img.getAttribute('src');
+    if (!getFromImageCache(imageUrl)) {
+      const image = new Image();
+      image.src = imageUrl;
+      imageCache.push({url: imageUrl, image: image});
+      if (imageCache.length > IMAGE_CACHE_LIMIT)
+        imageCache.shift();
+    }
+  }
 }
 
 function getFromPostCache(url) {
   for (const item of postCache) {
     if (item.url === url)
       return item.data;
+  }
+}
+
+function getFromImageCache(url) {
+  for (const item of imageCache) {
+    if (item.url === url)
+      return item.image;
   }
 }
 
