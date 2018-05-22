@@ -34,8 +34,8 @@ function loadPost(data) {
   for (const a of document.querySelectorAll('#sidebar-calendar a.active'))
     a.classList.remove('active');
   calendarLink.classList.add('active');
-  calendarLink.scrollIntoView({behavior: "smooth"});
   document.getElementById('main-content').scrollIntoView({behavior:"smooth"}); // For small screens
+  setTimeout(() => document.querySelector('#sidebar-calendar a.active').scrollIntoView({behavior: "smooth"}), 500);
 
   document.title = data.title + ' | Pedro Bravo Astrología';
 }
