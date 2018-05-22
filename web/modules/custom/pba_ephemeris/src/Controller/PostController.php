@@ -66,6 +66,7 @@ class PostController extends ControllerBase {
     $rendered = $view_builder->view($post);
     $array = [
       'url' => $post->toUrl()->toString(),
+      'title' => $post->label(),
       'rendered' => render($rendered),
     ];
     return new JsonResponse($array);

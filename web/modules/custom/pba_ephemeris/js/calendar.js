@@ -12,32 +12,41 @@ if (sidebarCalendar) {
   }
 }
 
+function loadPost(data) {
+  const post = document.querySelector('article.post.full');
+  const parent = post.parentNode;
+  const calendarLink = document.querySelector('#sidebar-calendar a[href=' + data.url.replace(/\//g, '\\/') + ']');
+
+  parent.removeChild(post);
+  const template = document.createElement('template');
+  template.innerHTML = data.rendered.trim();
+  parent.appendChild(template.content.querySelector('article.post.full'));
+
+  for (const a of parent.querySelectorAll('a[href^=\\/efemerides\\/]')) {
+    a.addEventListener('click', handleEphemerisClick);
+  }
+
+  for (const a of document.querySelectorAll('#sidebar-calendar a.active'))
+    a.classList.remove('active');
+  calendarLink.classList.add('active');
+
+  document.title = data.title + ' | Pedro Bravo Astrología';
+}
+
 // Load another post in "js-mode" (replaces the full page refresh)
 async function handleEphemerisClick(event) {
-  const href = this.getAttribute('href');
-  const calendarLink = document.querySelector('#sidebar-calendar a[href=' + href.replace(/\//g, '\\/') + ']');
-  const fullPostSelector = 'article.post.full';
-  const post = document.querySelector(fullPostSelector);
+  const url = this.getAttribute('href');
+  const calendarLink = document.querySelector('#sidebar-calendar a[href=' + url.replace(/\//g, '\\/') + ']');
+  const post = document.querySelector('article.post.full');
 
   calendarLink.classList.add('loading');
   post.classList.add('loading');
 
   try {
     event.preventDefault();
-    const data = await jQuery.getJSON('/js' + href);
-
-    const parent = post.parentNode;
-
-    parent.removeChild(post);
-    const template = document.createElement('template');
-    template.innerHTML = data.rendered.trim();
-    parent.appendChild(template.content.querySelector(fullPostSelector));
-    for (const a of parent.querySelectorAll('a[href^=\\/efemerides\\/]')) {
-      a.addEventListener('click', handleEphemerisClick);
-    }
-    for (const a of document.querySelectorAll('#sidebar-calendar a.active'))
-      a.classList.remove('active');
-    calendarLink.classList.add('active');
+    const data = await jQuery.getJSON('/js' + url);
+    loadPost(data);
+    window.history.pushState(data, data.title, data.url);
   }
   catch (e) {
     console.error(e);
@@ -50,3 +59,13 @@ async function handleEphemerisClick(event) {
 for (const a of document.querySelectorAll('a[href^=\\/efemerides\\/]')) {
   a.addEventListener('click', handleEphemerisClick);
 }
+
+window.addEventListener('popstate', function(event) {
+  loadPost(event.state);
+});
+
+window.history.replaceState({
+  'url': window.location.pathname,
+  'title': document.title.substr(0,10).trim(),
+  'rendered': document.querySelector('article.post.full').outerHTML,
+}, document.title);
