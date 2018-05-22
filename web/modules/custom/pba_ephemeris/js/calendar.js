@@ -68,9 +68,7 @@ for (const a of document.querySelectorAll('a[href^=\\/efemerides\\/]')) {
   a.addEventListener('click', handleEphemerisClick);
 }
 
-window.addEventListener('popstate', function(event) {
-  loadPost(event.state);
-});
+window.addEventListener('popstate', event => loadPost(event.state));
 
 window.history.replaceState({
   'url': window.location.pathname,
