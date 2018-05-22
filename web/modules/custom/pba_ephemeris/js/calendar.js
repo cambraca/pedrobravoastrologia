@@ -12,6 +12,9 @@ if (sidebarCalendar) {
   }
 }
 
+const postCache = [];
+const POST_CACHE_LIMIT = 50;
+
 function loadPost(data) {
   const post = document.querySelector('article.post.full');
   const parent = post.parentNode;
@@ -44,9 +47,12 @@ async function handleEphemerisClick(event) {
 
   try {
     event.preventDefault();
-    const data = await jQuery.getJSON('/js' + url);
+    let data = getFromPostCache(url);
+    if (!data)
+      data = await jQuery.getJSON('/js' + url);
     loadPost(data);
     window.history.pushState(data, data.title, data.url);
+    setTimeout(preloadAdjacentPosts);
   }
   catch (e) {
     console.error(e);
@@ -69,3 +75,28 @@ window.history.replaceState({
   'title': document.title.substr(0,10).trim(),
   'rendered': document.querySelector('article.post.full').outerHTML,
 }, document.title);
+
+async function preloadAdjacentPost(url) {
+  const data = await jQuery.getJSON('/js' + url);
+  postCache.push({url: url, data: data});
+  if (postCache.length > POST_CACHE_LIMIT)
+    postCache.shift();
+}
+
+function getFromPostCache(url) {
+  for (const item of postCache) {
+    if (item.url === url)
+      return item.data;
+  }
+}
+
+function preloadAdjacentPosts() {
+  const prev = document.querySelector('article.post.full .prev article.post a');
+  if (prev && !getFromPostCache(prev.getAttribute('href')))
+    preloadAdjacentPost(prev.getAttribute('href'));
+  const next = document.querySelector('article.post.full .next article.post a');
+  if (next && !getFromPostCache(next.getAttribute('href')))
+    preloadAdjacentPost(next.getAttribute('href'));
+}
+
+setTimeout(preloadAdjacentPosts);
