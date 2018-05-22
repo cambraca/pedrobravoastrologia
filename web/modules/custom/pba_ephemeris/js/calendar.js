@@ -123,3 +123,18 @@ function preloadAdjacentPosts() {
 }
 
 setTimeout(preloadAdjacentPosts);
+
+document.addEventListener('keyup', event => {
+  switch (event.keyCode) {
+    case 37: // Left arrow key
+      const prev = document.querySelector('article.post.full .prev article.post a');
+      if (prev)
+        prev.click();
+      break;
+    case 39: // Right arrow key
+      const next = document.querySelector('article.post.full .next article.post a');
+      if (next)
+        next.click();
+      break;
+  }
+});
