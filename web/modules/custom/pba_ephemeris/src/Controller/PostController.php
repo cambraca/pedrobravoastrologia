@@ -49,8 +49,8 @@ class PostController extends ControllerBase {
   function js($y, $m, $d) {
     $query = $this->storage->getQuery();
     $query->condition('type', 'post');
-//    if (\Drupal::currentUser()->isAnonymous())
-//      $query->condition('status', NodeInterface::PUBLISHED);
+    if (\Drupal::currentUser()->isAnonymous())
+      $query->condition('status', NodeInterface::PUBLISHED);
     $query->condition('field_date', "$y-$m-$d");
     $query->range(0, 1);
     $nids = $query->execute();

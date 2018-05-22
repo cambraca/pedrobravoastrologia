@@ -16,19 +16,16 @@ if (sidebarCalendar) {
 async function handleEphemerisClick(event) {
   const href = this.getAttribute('href');
   const calendarLink = document.querySelector('#sidebar-calendar a[href=' + href.replace(/\//g, '\\/') + ']');
+  const fullPostSelector = 'article.post.full';
+  const post = document.querySelector(fullPostSelector);
 
   calendarLink.classList.add('loading');
+  post.classList.add('loading');
 
   try {
     event.preventDefault();
-    const response = await fetch('/js' + href);
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
+    const data = await jQuery.getJSON('/js' + href);
 
-    const data = await response.json();
-    const fullPostSelector = 'article.post.full';
-    const post = document.querySelector(fullPostSelector);
     const parent = post.parentNode;
 
     parent.removeChild(post);

@@ -293,7 +293,10 @@ article.post.full {
   padding: 30px;
   margin: 0 auto;
   position: relative;
-  min-height: 65vh; }
+  min-height: 65vh;
+  transition: 2s opacity; }
+  article.post.full.loading {
+    opacity: 0.8; }
   article.post.full .field_image {
     grid-area: current; }
     article.post.full .field_image img {

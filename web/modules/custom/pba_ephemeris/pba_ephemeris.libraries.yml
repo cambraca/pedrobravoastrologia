@@ -1,3 +1,5 @@
 calendar:
   js:
     js/calendar.js: {}
+  dependencies:
+    - core/jquery
