@@ -1,0 +1,28 @@
+uuid: 6542d114-3d99-4eb9-8013-eb8e2b466eb0
+langcode: es
+status: true
+dependencies:
+  module:
+    - ctools
+    - pba_ephemeris
+  theme:
+    - pba
+id: searchbox
+theme: pba
+region: header
+weight: 0
+provider: null
+plugin: search
+settings:
+  id: search
+  label: 'Search box'
+  provider: pba_ephemeris
+  label_display: '0'
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    bundles:
+      post: post
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
