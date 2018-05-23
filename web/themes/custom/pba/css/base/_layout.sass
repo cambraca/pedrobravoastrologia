@@ -38,6 +38,8 @@ img
     display: none
 
   > header
+    display: flex
+    justify-content: space-between
     position: fixed
     z-index: 100
     background-color: $bg_blue
@@ -50,6 +52,21 @@ img
 
     @media #{$mobile-portrait}
       padding-left: 2 * $margin
+
+    > nav
+      flex-grow: 4
+      white-space: nowrap
+
+  #block-searchbox
+    flex-grow: 1
+    margin-top: 2px
+    @media #{$mobile-portrait--mobile-landscape}
+      display: none
+
+  @media #{$tablet}
+    &.has-sidebar #block-searchbox
+      // Leave space for the sidebar toggle icon
+      margin-right: 50px
 
   @media #{$mobile-portrait--mobile-landscape}
     #header-toggle:checked ~ header
@@ -71,7 +88,7 @@ img
 
   #sidebar-toggle-label
     position: fixed
-    top: 30px
+    top: 35px
     right: $margin
     z-index: 150
     font-size: 24px
@@ -178,3 +195,6 @@ img
 @media #{$desktop--desktop-wide}
   #page.has-sidebar
     margin-right: $sidebar-width
+
+    > header
+      padding-right: $sidebar-width + $margin

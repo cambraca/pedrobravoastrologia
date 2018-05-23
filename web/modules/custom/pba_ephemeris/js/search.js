@@ -6,13 +6,24 @@
     handleEphemerisClick.call(this, event);
   }
 
+  let searchTimeout = null;
   function handleSearch() {
+    if (searchTimeout)
+      clearTimeout(searchTimeout);
+
+    searchTimeout = setTimeout(doSearch, 150);
+  }
+
+  function doSearch() {
     const query = document.getElementById('search').value.trim();
 
     if (query === '') {
+      document.getElementById('block-searchbox').classList.remove('is-searching');
       hideSearchResults();
       return;
     }
+
+    document.getElementById('block-searchbox').classList.add('is-searching');
 
     algoliaIndex.search(query, (err, content) => {
       if (err) {
@@ -54,7 +65,9 @@
     searchResults.classList.add('show');
     resizeAllGridItems();
   };
-  const hideSearchResults = () => searchResults.classList.remove('show');
+  const hideSearchResults = () => {
+    searchResults.classList.remove('show');
+  };
   const clearSearchResults = () => {
     while (searchResults.childNodes.length) {
       searchResults.removeChild(searchResults.childNodes[0]);
@@ -62,6 +75,7 @@
   };
 
   search.addEventListener('keyup', handleSearch);
+  search.addEventListener('click', () => setTimeout(handleSearch));
 
   search.classList.add('is-initialized');
 
@@ -71,8 +85,8 @@
    */
 
   function resizeGridItem(item) {
-    const rowHeight = 1;
-    const rowGap = 30;
+    const rowHeight = 5;
+    const rowGap = 5;
     const rowSpan = Math.ceil((item.querySelector('img').getBoundingClientRect().height + rowGap) / (rowHeight + rowGap));
     item.style.gridRowEnd = "span " + rowSpan;
   }
@@ -84,9 +98,16 @@
     }
   }
 
+  let resizeTimeout = null;
   function resizeInstance(instance) {
     const item = instance.elements[0];
     resizeGridItem(item);
+
+    if (resizeTimeout)
+      clearTimeout(resizeTimeout);
+
+    resizeTimeout = setTimeout(resizeAllGridItems, 150);
+
   }
 
   window.addEventListener("resize", resizeAllGridItems);
