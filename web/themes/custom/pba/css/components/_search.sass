@@ -1,0 +1,19 @@
+#search
+  display: none
+  &.is-initialized
+    display: block
+
+#search-results
+  display: none
+  margin: $margin
+  grid-gap: $margin
+  grid-auto-rows: 1px
+  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr))
+  @media screen and (max-width: 850px)
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr))
+
+  &.show
+    display: grid
+
+    ~ article.post
+      display: none

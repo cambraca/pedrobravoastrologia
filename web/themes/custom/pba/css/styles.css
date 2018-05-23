@@ -13,9 +13,6 @@ body {
 a {
   text-decoration: none; }
 
-[v-cloak] {
-  display: none; }
-
 @font-face {
   font-family: "bellotaregular";
   src: url("../fonts/Bellota-Regular-webfont.woff") format("woff");
@@ -415,5 +412,24 @@ article.post.teaser.unpublished > .body {
         #sidebar-calendar table td a.loading:before {
           border-right-color: #ebebeb;
           border-left-color: #ebebeb; }
+
+#search {
+  display: none; }
+  #search.is-initialized {
+    display: block; }
+
+#search-results {
+  display: none;
+  margin: 30px;
+  grid-gap: 30px;
+  grid-auto-rows: 1px;
+  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr)); }
+  @media screen and (max-width: 850px) {
+    #search-results {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); } }
+  #search-results.show {
+    display: grid; }
+    #search-results.show ~ article.post {
+      display: none; }
 
 /*# sourceMappingURL=styles.css.map */

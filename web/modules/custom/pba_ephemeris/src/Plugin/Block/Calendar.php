@@ -29,14 +29,14 @@ class Calendar extends BlockBase {
       $end_month = $year === intval($now->format('Y')) ? intval($now->format('n')) : 12;
       for ($month = $start_month; $month <= $end_month; $month++) {
         $months[] = [
-          '#theme' => 'sidebar_calendar_month',
+          '#theme' => 'pba_sidebar_calendar_month',
           '#date' => new DrupalDateTime($year . '-' . $month . '-01'),
           '#cache' => ['max-age' => 100000], //TODO: doesn't work like this
         ];
       }
 
       $years[] = [
-        '#theme' => 'sidebar_calendar_year',
+        '#theme' => 'pba_sidebar_calendar_year',
         '#date' => new DrupalDateTime($year . '-01-01'),
         '#months' => $months,
       ];
@@ -44,7 +44,7 @@ class Calendar extends BlockBase {
     }
 
     return [
-      '#theme' => 'sidebar_calendar',
+      '#theme' => 'pba_sidebar_calendar',
       '#years' => $years,
       '#cache' => ['max-age' => 0],
       '#attached' => [

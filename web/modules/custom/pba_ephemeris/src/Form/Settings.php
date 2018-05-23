@@ -115,6 +115,17 @@ class Settings extends ConfigFormBase {
       '#submit' => ['::getFbPageAccessToken'],
     ];
 
+    $form['algolia'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Algolia'),
+    ];
+
+    $form['algolia']['algolia_search_api_key'] = [
+      '#type' => 'textfield',
+      '#title' => 'Search API Key',
+      '#default_value' => $config->get('algolia_search_api_key'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -152,11 +163,13 @@ class Settings extends ConfigFormBase {
     $values = $form_state->getValues();
     $config = $this->config('pba_ephemeris.settings');
 
-    $config->set('publish_time', (string) $values['publish_time'])
+    $config
+      ->set('publish_time', (string) $values['publish_time'])
       ->set('auto_publish', $values['auto_publish'])
       ->set('post_to_facebook', $values['post_to_facebook'])
       ->set('facebook_app_id', $values['facebook_app_id'])
-      ->set('facebook_page_id', $values['facebook_page_id']);
+      ->set('facebook_page_id', $values['facebook_page_id'])
+      ->set('algolia_search_api_key', $values['algolia_search_api_key']);
 
     if (trim($values['facebook_app_secret']))
       $config->set('facebook_app_secret', trim($values['facebook_app_secret']));

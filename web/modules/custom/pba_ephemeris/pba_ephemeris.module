@@ -34,7 +34,8 @@ function pba_ephemeris_form_node_post_edit_form_alter(&$form, \Drupal\Core\Form\
 
   $form['actions']['submit_and_edit_next_post'] = $form['actions']['submit'];
   $form['actions']['submit_and_edit_next_post']['#submit'][] = 'pba_ephemeris_edit_next_post';
-  $form['actions']['submit_and_edit_next_post']['#value'] = \Drupal::translation()->translate('Save and edit next post');
+  $form['actions']['submit_and_edit_next_post']['#value'] = \Drupal::translation()
+    ->translate('Save and edit next post');
 }
 
 function pba_ephemeris_edit_next_post($form, \Drupal\Core\Form\FormStateInterface $form_state) {
@@ -141,21 +142,24 @@ function pba_ephemeris_node_presave(Drupal\Core\Entity\EntityInterface $entity) 
  */
 function pba_ephemeris_theme($existing, $type, $theme, $path) {
   return [
-    'sidebar_calendar_month' => [
+    'pba_sidebar_calendar_month' => [
       'variables' => [
         'date' => NULL,
       ],
     ],
-    'sidebar_calendar_year' => [
+    'pba_sidebar_calendar_year' => [
       'variables' => [
         'date' => NULL,
         'months' => NULL,
       ],
     ],
-    'sidebar_calendar' => [
+    'pba_sidebar_calendar' => [
       'variables' => [
         'years' => NULL,
       ],
+    ],
+    'pba_search' => [
+      'variables' => [],
     ],
   ];
 }
@@ -163,7 +167,7 @@ function pba_ephemeris_theme($existing, $type, $theme, $path) {
 /**
  * Implements hook_preprocess_HOOK().
  */
-function pba_ephemeris_preprocess_sidebar_calendar_month(&$variables) {
+function pba_ephemeris_preprocess_pba_sidebar_calendar_month(&$variables) {
   /** @var \Drupal\node\Entity\Node|NULL $current_post */
   $current_post = \Drupal::routeMatch()->getParameter('node');
 
@@ -181,7 +185,7 @@ function pba_ephemeris_preprocess_sidebar_calendar_month(&$variables) {
   $query->condition('field_date', $to->format('Y-m-d'), '<');
   $nids = $query->execute();
 
-  if ($nids)
+  if ($nids) {
     foreach (\Drupal\node\Entity\Node::loadMultiple($nids) as $post) {
       /** @var \Drupal\node\Entity\Node $post */
       $date = new \Drupal\Core\Datetime\DrupalDateTime($post->get('field_date')->value);
@@ -196,6 +200,7 @@ function pba_ephemeris_preprocess_sidebar_calendar_month(&$variables) {
         'class' => implode(' ', $class),
       ];
     }
+  }
 
   $variables['posts_by_date'] = $posts_by_date;
 }
@@ -203,7 +208,8 @@ function pba_ephemeris_preprocess_sidebar_calendar_month(&$variables) {
 /**
  * Implements hook_preprocess_HOOK().
  *
- * This should ideally be done using CustomMenuActiveTrail. See PbaEphemerisServiceProvider.php.
+ * This should ideally be done using CustomMenuActiveTrail. See
+ * PbaEphemerisServiceProvider.php.
  */
 function pba_ephemeris_preprocess_menu(&$variables) {
   if ($variables['menu_name'] !== 'main')
@@ -269,5 +275,27 @@ function pba_ephemeris_cron() {
 
     \Drupal::logger('pba_ephemeris')
       ->info('Published post', ['link' => $post->toLink()->toString()]);
+  }
+}
+
+/**
+ * Implements hook_search_api_index_items_alter().
+ */
+function pba_ephemeris_search_api_index_items_alter(\Drupal\search_api\IndexInterface $index, array &$items) {
+  if ($index->id() !== 'posts')
+    return;
+
+  $style = \Drupal\image\Entity\ImageStyle::load('medium');
+
+  /** @var Drupal\search_api\Item\Item $item */
+  foreach ($items as $item) {
+    $f = $item->getField('image');
+    $values = $f->getValues();
+    if (!count($values)) {
+      continue;
+    }
+
+    $uri = current($values);
+    $f->setValues([$style->buildUrl($uri)]);
   }
 }
