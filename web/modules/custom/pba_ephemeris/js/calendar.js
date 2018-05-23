@@ -1,17 +1,6 @@
 // The code on this file assumes its script tag appears after the sidebar
 // calendar.
 
-// Make sure we show the current day on the calendar sidebar
-const sidebar = document.getElementById('sidebar');
-sidebar.scrollTop = sidebar.scrollHeight;
-const sidebarCalendar = document.getElementById('sidebar-calendar');
-if (sidebarCalendar) {
-  const active = sidebarCalendar.getElementsByClassName('active');
-  if (active.length > 0) {
-    active[0].scrollIntoView({behavior: "instant"});
-  }
-}
-
 const postCache = [];
 const POST_CACHE_LIMIT = 50;
 const imageCache = [];

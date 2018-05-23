@@ -79,6 +79,18 @@
     <aside id="sidebar">
       {{ page.sidebar }}
     </aside>
+    <script type="text/javascript">
+      // Make sure we show the current day on the calendar sidebar
+      const sidebar = document.getElementById('sidebar');
+      sidebar.scrollTop = sidebar.scrollHeight;
+      const sidebarCalendar = document.getElementById('sidebar-calendar');
+      if (sidebarCalendar) {
+        const active = sidebarCalendar.getElementsByClassName('active');
+        if (active.length > 0) {
+          active[0].scrollIntoView({behavior: "instant"});
+        }
+      }
+    </script>
   {% endif %}
 
   <footer role="contentinfo">
