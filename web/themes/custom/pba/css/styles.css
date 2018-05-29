@@ -304,7 +304,7 @@ article.post.full {
   display: grid;
   grid-gap: 30px;
   grid-template-areas: "current current" "prev next";
-  grid-template-columns: auto;
+  grid-template-columns: 1fr 1fr;
   padding: 30px;
   margin: 0 auto;
   position: relative;
