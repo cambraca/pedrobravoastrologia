@@ -2,7 +2,7 @@ name: PBA
 type: theme
 package: Core
 version: VERSION
-core: 8.x
+core_version_requirement: ^9.5 || ^10
 base theme: false
 
 regions:

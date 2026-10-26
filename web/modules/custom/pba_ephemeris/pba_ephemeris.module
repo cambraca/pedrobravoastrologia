@@ -6,7 +6,7 @@
  * last post is in the future.
  */
 function pba_ephemeris_form_node_post_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  $query = \Drupal::entityQuery('node');
+  $query = \Drupal::entityQuery('node')->accessCheck(TRUE);
   $query->condition('type', 'post');
   $query->sort('field_date', 'DESC');
   $query->range(0, 1);
@@ -56,7 +56,7 @@ function pba_ephemeris_edit_next_post($form, \Drupal\Core\Form\FormStateInterfac
  * @return \Drupal\node\Entity\Node|null
  */
 function _pba_ephemeris_adjacent_post(\Drupal\node\Entity\Node $node, $direction = 'prev') {
-  $query = \Drupal::entityQuery('node');
+  $query = \Drupal::entityQuery('node')->accessCheck(TRUE);
   $query->condition('type', 'post');
   if (\Drupal::currentUser()->isAnonymous())
     $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
@@ -177,7 +177,7 @@ function pba_ephemeris_preprocess_pba_sidebar_calendar_month(&$variables) {
   $to->add(new DateInterval('P1M'));
   $posts_by_date = [];
 
-  $query = \Drupal::entityQuery('node');
+  $query = \Drupal::entityQuery('node')->accessCheck(TRUE);
   $query->condition('type', 'post');
   if (\Drupal::currentUser()->isAnonymous())
     $query->condition('status', \Drupal\node\NodeInterface::PUBLISHED);
@@ -257,7 +257,7 @@ function pba_ephemeris_cron() {
     return;
   \Drupal::state()->set('pba_ephemeris.last_ran', $request_time);
 
-  $query = \Drupal::entityQuery('node');
+  $query = \Drupal::entityQuery('node')->accessCheck(TRUE);
   $query->condition('type', 'post');
   $query->condition('status', \Drupal\node\NodeInterface::NOT_PUBLISHED);
   $query->condition('field_date', $now->format('Y-m-d'));

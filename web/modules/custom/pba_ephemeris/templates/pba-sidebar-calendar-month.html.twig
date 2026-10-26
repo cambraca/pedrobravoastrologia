@@ -1,7 +1,7 @@
 {% set month_labels = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'] %}
 {% set skip = date|date('N')-1 %}
 {% set end_day = date|date_modify("+1 month")|date_modify("-1 day")|date("j") %}
-{% spaceless %}
+{% apply spaceless %}
   <table>
     <caption title="{{ month_labels[date|date('n')-1] }} {{ date|date('Y') }}">{{ month_labels[date|date('n')-1] }}</caption>
     <tbody>
@@ -26,4 +26,4 @@
     </tr>
     </tbody>
   </table>
-{% endspaceless %}
+{% endapply %}

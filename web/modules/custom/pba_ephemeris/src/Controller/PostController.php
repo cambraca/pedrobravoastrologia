@@ -33,7 +33,7 @@ class PostController extends ControllerBase {
   }
 
   protected function getLatestPostId() {
-    $query = $this->storage->getQuery();
+    $query = $this->storage->getQuery()->accessCheck(TRUE);
     $query->condition('type', 'post');
     $query->condition('status', NodeInterface::PUBLISHED);
     $query->sort('field_date', 'DESC');
@@ -47,7 +47,7 @@ class PostController extends ControllerBase {
   }
 
   function js($y, $m, $d) {
-    $query = $this->storage->getQuery();
+    $query = $this->storage->getQuery()->accessCheck(TRUE);
     $query->condition('type', 'post');
     if (\Drupal::currentUser()->isAnonymous())
       $query->condition('status', NodeInterface::PUBLISHED);
@@ -67,7 +67,7 @@ class PostController extends ControllerBase {
     $array = [
       'url' => $post->toUrl()->toString(),
       'title' => $post->label(),
-      'rendered' => render($rendered),
+      'rendered' => (string) \Drupal::service('renderer')->renderRoot($rendered),
     ];
     return new JsonResponse($array);
   }

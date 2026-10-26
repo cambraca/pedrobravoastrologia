@@ -17,6 +17,7 @@ class SocialMedia {
       return NULL;
 
     return new Facebook([
+      'default_graph_version' => 'v26.0',
       'app_id' => $config->get('facebook_app_id'),
       'app_secret' => $config->get('facebook_app_secret'),
     ]);
@@ -48,7 +49,7 @@ class SocialMedia {
 
     $data = [
 //      'source' => $fb->fileToUpload(\Drupal::service('file_system')->realpath($image->getFileUri())),
-      'url' => $image->url(),
+      'url' => $image->createFileUrl(FALSE),
       'message' => $node->toUrl()->setAbsolute()->toString(),
     ];
 
