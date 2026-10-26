@@ -100,7 +100,8 @@ class Settings extends ConfigFormBase {
       $loginUrl = $helper->getLoginUrl(Url::fromRoute('<current>', [], [
         'absolute' => TRUE,
         'query' => ['fb' => 1]
-      ])->toString(), ['manage_pages', 'publish_pages']);
+      ])->toString(), []);
+//      ])->toString(), ['manage_pages', 'publish_pages']);
 
       $form['facebook']['facebook_login'] = [
         '#type' => 'link',
